@@ -159,12 +159,87 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 .btn-g{background:var(--gbg);color:var(--green);border-color:var(--gbr)}.btn-g:hover{background:#dcfce7}
 .btn-a{background:var(--abg);color:var(--amber);border-color:var(--abr)}.btn-a:hover{background:#fde68a}
 
-/* GUIDE */
-.gstep{display:flex;gap:18px;margin-bottom:28px}
-.gnum{min-width:34px;height:34px;border-radius:8px;background:var(--text);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
-.gt{font-size:14px;font-weight:600;color:var(--text);margin-bottom:5px}
-.gd{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:8px}
-.code{background:var(--text);border-radius:8px;padding:14px 16px;font-family:'Courier New',monospace;font-size:12px;color:#e2e8f0;line-height:1.8;overflow-x:auto}
+/* NOTES */
+.nfbtn{font-size:12px;font-weight:500;padding:5px 12px;border-radius:20px;border:1px solid var(--border2);color:var(--text3);cursor:pointer;background:var(--bg2);transition:all .15s;font-family:'Inter',sans-serif}
+.nfbtn:hover{background:var(--bg3);color:var(--text)}.nfbtn.on{background:var(--text);color:#fff;border-color:var(--text)}
+.note-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px 18px;margin-bottom:10px;box-shadow:var(--sh);transition:box-shadow .15s}
+.note-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.note-card-top{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.note-card-body{font-size:13px;color:var(--text2);line-height:1.7;white-space:pre-wrap}
+.note-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.note-card-meta{font-size:11px;color:var(--text3)}
+.note-del{font-size:11px;font-weight:500;color:var(--text3);cursor:pointer;padding:3px 8px;border-radius:4px;border:1px solid var(--border);background:none;font-family:'Inter',sans-serif;transition:all .15s}
+.note-del:hover{background:var(--rbg);color:var(--red);border-color:var(--rbr)}
+.ncat-pill{font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;letter-spacing:.04em}
+.ncat-Mistake{background:var(--rbg);color:var(--red);border:1px solid var(--rbr)}
+.ncat-Learning{background:var(--gbg);color:var(--green);border:1px solid var(--gbr)}
+.ncat-Pattern{background:var(--bbg);color:var(--blue);border:1px solid var(--bbr)}
+.ncat-Rule{background:var(--abg);color:var(--amber);border:1px solid var(--abr)}
+.ncat-Observation{background:var(--bg3);color:var(--text2);border:1px solid var(--border2)}
+.nwho-pill{font-size:10px;font-weight:600;padding:2px 8px;border-radius:3px;background:var(--tbg);color:var(--teal);border:1px solid var(--tbr)}
+
+/* DAILY PREP */
+.pbtn{font-size:12px;font-weight:500;padding:6px 12px;border-radius:6px;border:1px solid var(--border2);color:var(--text2);cursor:pointer;background:var(--bg2);transition:all .15s;font-family:'Inter',sans-serif}
+.pbtn:hover{background:var(--bg3);color:var(--text)}
+.pbtn.sel{background:var(--text);color:#fff;border-color:var(--text)}
+.pbtn-g.sel{background:var(--green);border-color:var(--green);color:#fff}
+.pbtn-r.sel{background:var(--red);border-color:var(--red);color:#fff}
+.pbtn-a.sel{background:var(--amber);border-color:var(--amber);color:#fff}
+.prep-input{width:100%;padding:7px 11px;border:1px solid var(--border2);border-radius:6px;font-size:13px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg2);outline:none;transition:border .15s}
+.prep-input:focus{border-color:var(--blue)}
+.prep-rule{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:6px;background:var(--bg3);margin-bottom:5px;cursor:pointer;transition:background .1s;user-select:none}
+.prep-rule:hover{background:var(--border)}
+.prep-rule.checked{background:var(--gbg)}
+.prep-rule-box{width:15px;height:15px;border-radius:3px;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.prep-rule.checked .prep-rule-box{background:var(--green);border-color:var(--green)}
+.prep-rule-text{font-size:12px;color:var(--text2)}
+.prep-rule.checked .prep-rule-text{color:var(--text3);text-decoration:line-through}
+.conf-item-row{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:var(--bg3);border-radius:6px;font-size:12px}
+.conf-item-row.conf-yes{background:var(--gbg)}
+.conf-toggle{width:28px;height:16px;border-radius:8px;border:none;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0}
+.conf-toggle.off{background:var(--border2)}
+.conf-toggle.on{background:var(--green)}
+.conf-toggle::after{content:'';position:absolute;width:12px;height:12px;border-radius:50%;background:#fff;top:2px;transition:left .2s}
+.conf-toggle.off::after{left:2px}
+.conf-toggle.on::after{left:14px}
+.hist-row{display:flex;gap:10px;align-items:center;padding:9px 12px;background:var(--bg3);border-radius:7px;margin-bottom:6px;flex-wrap:wrap}
+.hist-date{font-size:11px;font-weight:600;color:var(--text3);min-width:80px}
+.hist-tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;border:1px solid}
+
+/* LOGIN OVERLAY */
+#login-overlay{position:fixed;inset:0;z-index:9000;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:20px}
+#login-box{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:40px 36px;width:100%;max-width:380px;box-shadow:0 8px 32px rgba(0,0,0,.1);text-align:center}
+.login-logo{width:44px;height:44px;border-radius:10px;background:var(--text);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;margin:0 auto 16px}
+.login-title{font-family:'Fraunces',serif;font-size:24px;color:var(--text);margin-bottom:4px}
+.login-sub{font-size:13px;color:var(--text3);margin-bottom:28px}
+.login-btns{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.login-btn{width:100%;padding:12px;border-radius:8px;border:1px solid var(--border2);font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;display:flex;align-items:center;justify-content:space-between;background:var(--bg2);color:var(--text)}
+.login-btn:hover{background:var(--bg3)}
+.login-btn-enz{border-color:#bfdbfe;background:#eff6ff}
+.login-btn-enz:hover{background:#dbeafe}
+.login-btn-abd{border-color:#ddd6fe;background:#f5f3ff}
+.login-btn-abd:hover{background:#ede9fe}
+.login-pw-section{display:none;margin-top:4px}
+.login-pw-section.show{display:block}
+.login-pw-input{width:100%;padding:10px 12px;border:1px solid var(--border2);border-radius:7px;font-size:14px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg2);outline:none;margin-bottom:8px;text-align:center;letter-spacing:.08em}
+.login-pw-input:focus{border-color:var(--blue)}
+.login-pw-err{font-size:12px;color:var(--red);margin-bottom:8px;min-height:16px}
+.login-pw-submit{width:100%;padding:10px;border-radius:7px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;background:var(--text);color:#fff;transition:opacity .15s}
+.login-pw-submit:hover{opacity:.85}
+.login-guest{font-size:12px;color:var(--text3);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.login-guest:hover{color:var(--text)}
+/* user badge in bar */
+#user-badge{display:none;align-items:center;gap:8px}
+.ubadge{font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;border:1px solid}
+.ubadge-enz{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe}
+.ubadge-abd{background:#f5f3ff;color:#6d28d9;border-color:#ddd6fe}
+.ubadge-guest{background:var(--bg3);color:var(--text3);border-color:var(--border2)}
+.logout-btn{font-size:11px;color:var(--text3);cursor:pointer;padding:4px 8px;border-radius:5px;border:1px solid var(--border);background:none;font-family:'Inter',sans-serif}
+.logout-btn:hover{background:var(--bg3);color:var(--text)}
+/* readonly overlay on checklist */
+.cl-readonly-banner{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--text3);display:flex;align-items:center;gap:8px}
+.cl-unlock-btn{font-size:11px;font-weight:600;padding:4px 10px;border-radius:5px;border:1px solid var(--border2);background:var(--bg2);color:var(--text2);cursor:pointer;font-family:'Inter',sans-serif;margin-left:auto}
+.cl-unlock-btn:hover{background:var(--bg3)}
 
 /* TOAST */
 #toast{position:fixed;bottom:22px;right:22px;z-index:9999;font-size:13px;font-weight:500;padding:11px 17px;border-radius:8px;background:var(--text);color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15);transform:translateY(60px);opacity:0;transition:all .3s;pointer-events:none}
@@ -182,12 +257,43 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 </head>
 <body>
 
+<!-- ══════════ LOGIN OVERLAY ══════════ -->
+<div id="login-overlay">
+  <div id="login-box">
+    <div class="login-logo">ES</div>
+    <div class="login-title">Edge System</div>
+    <div class="login-sub">Who are you?</div>
+    <div class="login-btns">
+      <button class="login-btn login-btn-enz" onclick="selectUser('enz')">
+        <span>🔵 Enz</span><span style="font-size:11px;font-weight:400;color:#1d4ed8">Enter password →</span>
+      </button>
+      <button class="login-btn login-btn-abd" onclick="selectUser('abd')">
+        <span>🟣 Abdullah</span><span style="font-size:11px;font-weight:400;color:#6d28d9">Enter password →</span>
+      </button>
+    </div>
+    <div class="login-pw-section" id="login-pw-section">
+      <input class="login-pw-input" id="login-pw-input" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')submitLogin()"/>
+      <div class="login-pw-err" id="login-pw-err"></div>
+      <button class="login-pw-submit" onclick="submitLogin()">Sign in</button>
+    </div>
+    <div style="margin-top:16px">
+      <span class="login-guest" onclick="loginGuest()">Continue as guest (read-only)</span>
+    </div>
+  </div>
+</div>
+
 <div id="bar">
   <div class="logo"><div class="logo-mark">ES</div>Edge System</div>
-  <div class="pills">
-    <span class="pill">ES · 15 tick stop</span>
-    <span class="pill">Max 5 trades/day</span>
-    <span class="pill">3 losses = done</span>
+  <div style="display:flex;align-items:center;gap:10px">
+    <div class="pills">
+      <span class="pill">ES · 15 tick stop</span>
+      <span class="pill">Max 5 trades/day</span>
+      <span class="pill">3 losses = done</span>
+    </div>
+    <div id="user-badge">
+      <span id="ubadge-label" class="ubadge"></span>
+      <button class="logout-btn" onclick="doLogout()">Switch</button>
+    </div>
   </div>
 </div>
 
@@ -195,7 +301,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
   <div class="ntab on" onclick="go('edge',this)"><span class="tdot" style="background:var(--text)"></span>Edge System</div>
   <div class="ntab" onclick="go('enz',this)"><span class="tdot" style="background:#2563eb"></span>Enz Checklist</div>
   <div class="ntab" onclick="go('abd',this)"><span class="tdot" style="background:#7c3aed"></span>Abdullah Checklist</div>
-  <div class="ntab" onclick="go('guide',this)"><span class="tdot" style="background:#d97706"></span>Setup Guide</div>
+  <div class="ntab" onclick="go('notes',this)"><span class="tdot" style="background:#0d9488"></span>Notes & Learnings</div>
+  <div class="ntab" onclick="go('prep',this)"><span class="tdot" style="background:#ea580c"></span>Daily Prep</div>
 </div>
 
 <div id="wrap">
@@ -809,88 +916,378 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 <div class="page" id="pg-enz"><div id="enz-wrap"></div></div>
 <div class="page" id="pg-abd"><div id="abd-wrap"></div></div>
 
-<!-- ══════════ GUIDE PAGE ══════════ -->
-<div class="page" id="pg-guide">
+<!-- ══════════ NOTES PAGE ══════════ -->
+<div class="page" id="pg-notes">
 
-<div class="hero" style="margin-bottom:28px">
+<div class="hero" style="margin-bottom:28px;grid-template-columns:1fr">
   <div>
-    <div class="hero-eye">Step-by-step deployment</div>
-    <div class="hero-h">Launch Your Site</div>
-    <div class="hero-sub">GitHub + Vercel in under 5 minutes. No login, no database. Everything saves to the browser. Also explains why the 404 error happened.</div>
+    <div class="hero-eye">Personal trading journal</div>
+    <div class="hero-h">Notes & Learnings</div>
+    <div class="hero-sub">Log mistakes, patterns, and observations. Everything syncs via Supabase — accessible on any device.</div>
+    <div class="htags">
+      <span class="tag tt">Synced</span>
+      <span class="tag tg">All categories</span>
+    </div>
   </div>
 </div>
 
-<div class="note note-r" style="margin-bottom:26px">
-  <div class="note-t">Why you got the 404 error</div>
-  The previous version tried to connect to Supabase using placeholder credentials (<code style="background:#fecaca;padding:1px 5px;border-radius:3px">your-project.supabase.co</code>). Those don't point to a real project, so Vercel returned 404. This new version has <strong>zero Supabase</strong>. Everything saves to localStorage — nothing to connect to, nothing to break.
-</div>
-
-<div class="gstep">
-  <div class="gnum">01</div>
-  <div>
-    <div class="gt">Create a new GitHub repository</div>
-    <div class="gd">Go to <strong>github.com</strong> → click <strong>+</strong> top right → <strong>New repository</strong> → name it <code>edge-system</code> → set to <strong>Public</strong> → check <strong>Add a README file</strong> → <strong>Create repository</strong></div>
+<!-- Compose box -->
+<div class="card" style="margin-bottom:20px" id="notes-compose">
+  <div class="lbl" style="margin-bottom:10px">New entry</div>
+  <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
+    <select id="note-cat" style="padding:7px 11px;border:1px solid var(--border2);border-radius:6px;font-size:12px;background:var(--bg2);color:var(--text);font-family:'Inter',sans-serif;outline:none">
+      <option value="Mistake">🔴 Mistake</option>
+      <option value="Learning">🟢 Learning</option>
+      <option value="Pattern">🔵 Pattern</option>
+      <option value="Rule">🟡 Rule</option>
+      <option value="Observation">⚪ Observation</option>
+    </select>
+    <select id="note-who" style="padding:7px 11px;border:1px solid var(--border2);border-radius:6px;font-size:12px;background:var(--bg2);color:var(--text);font-family:'Inter',sans-serif;outline:none">
+      <option value="Enz">Enz</option>
+      <option value="Abdullah">Abdullah</option>
+      <option value="Both">Both</option>
+    </select>
+    <input id="note-date" type="date" style="padding:7px 11px;border:1px solid var(--border2);border-radius:6px;font-size:12px;background:var(--bg2);color:var(--text);font-family:'Inter',sans-serif;outline:none"/>
+  </div>
+  <textarea id="note-text" placeholder="Write your note here — what happened, what you learned, what you'll do differently…" style="width:100%;min-height:90px;padding:10px 13px;border:1px solid var(--border2);border-radius:6px;font-size:13px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg2);resize:vertical;outline:none;line-height:1.6"></textarea>
+  <div style="display:flex;gap:8px;margin-top:10px;align-items:center">
+    <button class="btn btn-p" onclick="addNote()">Save note</button>
+    <button class="btn" onclick="document.getElementById('note-text').value=''">Clear</button>
+    <span id="note-saving" style="font-size:12px;color:var(--text3);margin-left:4px"></span>
   </div>
 </div>
 
-<div class="gstep">
-  <div class="gnum">02</div>
+<!-- Filter bar -->
+<div style="display:flex;gap:7px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
+  <span style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em">Filter:</span>
+  <button class="nfbtn on" onclick="filterNotes('all',this)">All</button>
+  <button class="nfbtn" onclick="filterNotes('Mistake',this)">🔴 Mistakes</button>
+  <button class="nfbtn" onclick="filterNotes('Learning',this)">🟢 Learnings</button>
+  <button class="nfbtn" onclick="filterNotes('Pattern',this)">🔵 Patterns</button>
+  <button class="nfbtn" onclick="filterNotes('Rule',this)">🟡 Rules</button>
+  <button class="nfbtn" onclick="filterNotes('Observation',this)">⚪ Observations</button>
+</div>
+
+<!-- Notes list -->
+<div id="notes-list">
+  <div style="padding:48px;text-align:center;color:var(--text3);font-size:13px">Loading notes…</div>
+</div>
+
+</div><!-- end notes page -->
+
+<!-- ══════════ DAILY PREP PAGE ══════════ -->
+<div class="page" id="pg-prep">
+
+<div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px">
   <div>
-    <div class="gt">Upload your index.html</div>
-    <div class="gd">In your new repo → click <strong>Add file</strong> → <strong>Upload files</strong> → drag and drop <code>index.html</code> → write a commit message → click <strong>Commit changes</strong></div>
+    <div style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:4px">Morning routine</div>
+    <div style="font-family:'Fraunces',serif;font-size:28px;color:var(--text);letter-spacing:-.02em" id="prep-title">Daily Session Prep</div>
+    <div style="font-size:13px;color:var(--text3);margin-top:2px" id="prep-date-label"></div>
+  </div>
+  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+    <span id="prep-sync-status" style="font-size:11px;color:var(--text3)"></span>
+    <button class="btn btn-p" onclick="savePrep()">Save prep</button>
+    <button class="btn" onclick="clearPrep()">New day</button>
   </div>
 </div>
 
-<div class="gstep">
-  <div class="gnum">03</div>
-  <div>
-    <div class="gt">Deploy to Vercel</div>
-    <div class="gd">Go to <strong>vercel.com</strong> → log in with GitHub → <strong>Add New → Project</strong> → find <code>edge-system</code> → <strong>Import</strong> → leave all settings default → <strong>Deploy</strong><br/>30–60 seconds later your site is live at <code>edge-system.vercel.app</code></div>
-    <div class="note note-g">From now on: edit <code>index.html</code> on GitHub (click file → pencil ✏️ → commit) and Vercel auto-deploys in ~30 seconds. No manual steps ever again.</div>
+<!-- Row 1: Session + Bias -->
+<div class="g2" style="margin-bottom:14px">
+
+  <div class="card">
+    <div class="lbl" style="margin-bottom:12px">Session & Market State</div>
+    <div style="margin-bottom:10px">
+      <div style="font-size:11px;font-weight:600;color:var(--text3);margin-bottom:6px">Session</div>
+      <div style="display:flex;gap:6px">
+        <button class="pbtn" id="psess-NY" onclick="pickPrep('session','NY',['NY','London','Asia'])">NY</button>
+        <button class="pbtn" id="psess-London" onclick="pickPrep('session','London',['NY','London','Asia'])">London</button>
+        <button class="pbtn" id="psess-Asia" onclick="pickPrep('session','Asia',['NY','London','Asia'])">Asia</button>
+      </div>
+    </div>
+    <div style="margin-bottom:10px">
+      <div style="font-size:11px;font-weight:600;color:var(--text3);margin-bottom:6px">Market State</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <button class="pbtn" id="pstate-Balance" onclick="pickPrep('state','Balance',['Balance','Imbalance','Transition'])">Balance</button>
+        <button class="pbtn" id="pstate-Imbalance" onclick="pickPrep('state','Imbalance',['Balance','Imbalance','Transition'])">Imbalance</button>
+        <button class="pbtn" id="pstate-Transition" onclick="pickPrep('state','Transition',['Balance','Imbalance','Transition'])">Transition</button>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:600;color:var(--text3);margin-bottom:6px">Approach</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <button class="pbtn" id="pappr-Trend" onclick="pickPrep('approach','Trend',['Trend','Mean Reversion','No Trade'])">Trend</button>
+        <button class="pbtn" id="pappr-Mean Reversion" onclick="pickPrep('approach','Mean Reversion',['Trend','Mean Reversion','No Trade'])">Mean Reversion</button>
+        <button class="pbtn pbtn-r" id="pappr-No Trade" onclick="pickPrep('approach','No Trade',['Trend','Mean Reversion','No Trade'])">No Trade</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="lbl" style="margin-bottom:12px">Bias</div>
+    <div style="margin-bottom:10px">
+      <div style="font-size:11px;font-weight:600;color:var(--text3);margin-bottom:6px">VWAP</div>
+      <div style="display:flex;gap:6px">
+        <button class="pbtn pbtn-g" id="pvwap-Long" onclick="pickPrep('vwap','Long',['Long','Short','Conflict'])">Long (above)</button>
+        <button class="pbtn pbtn-r" id="pvwap-Short" onclick="pickPrep('vwap','Short',['Long','Short','Conflict'])">Short (below)</button>
+        <button class="pbtn pbtn-a" id="pvwap-Conflict" onclick="pickPrep('vwap','Conflict',['Long','Short','Conflict'])">Conflict</button>
+      </div>
+    </div>
+    <div style="margin-bottom:10px">
+      <div style="font-size:11px;font-weight:600;color:var(--text3);margin-bottom:6px">PSVP</div>
+      <div style="display:flex;gap:6px">
+        <button class="pbtn pbtn-g" id="ppsvp-Long" onclick="pickPrep('psvp','Long',['Long','Short','Conflict'])">Long (above)</button>
+        <button class="pbtn pbtn-r" id="ppsvp-Short" onclick="pickPrep('psvp','Short',['Long','Short','Conflict'])">Short (below)</button>
+        <button class="pbtn pbtn-a" id="ppsvp-Conflict" onclick="pickPrep('psvp','Conflict',['Long','Short','Conflict'])">Conflict</button>
+      </div>
+    </div>
+    <div id="bias-result" style="padding:8px 12px;border-radius:6px;font-size:12px;font-weight:600;display:none"></div>
   </div>
 </div>
 
-<div class="gstep">
-  <div class="gnum">04</div>
-  <div>
-    <div class="gt">How to edit checklists without touching code</div>
-    <div class="gd">Go to Enz or Abdullah's checklist tab → click <strong>✏️ Edit checklist</strong> → tap × to delete items → type new items and pick a category → click Add. All changes save instantly to localStorage in the browser. No code editing needed.</div>
+<!-- Row 2: Key Levels -->
+<div class="card" style="margin-bottom:14px">
+  <div class="lbl" style="margin-bottom:12px">Key Levels</div>
+  <div class="g3">
+    <div>
+      <div style="font-size:11px;font-weight:600;color:var(--red);margin-bottom:5px">Resistance / VAH</div>
+      <input class="prep-input" id="pl-vah" placeholder="e.g. 5312.25" oninput="prepFieldChange()"/>
+      <input class="prep-input" id="pl-res2" placeholder="2nd level" oninput="prepFieldChange()" style="margin-top:5px"/>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:600;color:var(--amber);margin-bottom:5px">POC / Pivot</div>
+      <input class="prep-input" id="pl-poc" placeholder="e.g. 5298.50" oninput="prepFieldChange()"/>
+      <input class="prep-input" id="pl-pivot2" placeholder="2nd level" oninput="prepFieldChange()" style="margin-top:5px"/>
+    </div>
+    <div>
+      <div style="font-size:11px;font-weight:600;color:var(--green);margin-bottom:5px">Support / VAL</div>
+      <input class="prep-input" id="pl-val" placeholder="e.g. 5281.75" oninput="prepFieldChange()"/>
+      <input class="prep-input" id="pl-sup2" placeholder="2nd level" oninput="prepFieldChange()" style="margin-top:5px"/>
+    </div>
+  </div>
+  <div style="margin-top:12px">
+    <div style="font-size:11px;font-weight:600;color:var(--text3);margin-bottom:5px">LVN Target Zone</div>
+    <input class="prep-input" id="pl-lvn" placeholder="LVN range where you'll watch for entry…" oninput="prepFieldChange()" style="max-width:320px"/>
   </div>
 </div>
 
-<div class="gstep">
-  <div class="gnum">05</div>
-  <div>
-    <div class="gt">Optional — Custom domain</div>
-    <div class="gd">Buy a domain at <strong>namecheap.com</strong> (~$10/year) → in Vercel → your project → <strong>Settings → Domains</strong> → add your domain → paste the DNS records Vercel gives you into Namecheap → done in 5–30 minutes.</div>
+<!-- Row 3: Instrument + Model -->
+<div class="g2" style="margin-bottom:14px">
+
+  <div class="card">
+    <div class="lbl" style="margin-bottom:12px">Instrument</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <button class="pbtn" id="pinst-ES" onclick="pickPrep('instrument','ES',['ES','NQ','GC','Other'])">ES</button>
+      <button class="pbtn" id="pinst-NQ" onclick="pickPrep('instrument','NQ',['ES','NQ','GC','Other'])">NQ</button>
+      <button class="pbtn" id="pinst-GC" onclick="pickPrep('instrument','GC',['ES','NQ','GC','Other'])">GC</button>
+      <button class="pbtn" id="pinst-Other" onclick="pickPrep('instrument','Other',['ES','NQ','GC','Other'])">Other</button>
+    </div>
+    <div style="margin-top:12px">
+      <div style="font-size:11px;font-weight:600;color:var(--text3);margin-bottom:5px">Max stop for today</div>
+      <div id="prep-stop-display" style="font-size:20px;font-weight:700;color:var(--red);font-family:'Fraunces',serif">15 ticks</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:2px">ES default — changes with instrument</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="lbl" style="margin-bottom:12px">Model watching for</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px">
+      <button class="pbtn" id="pmod-Absorption" onclick="pickPrep('model','Absorption',['Absorption','Breakout Cont.','Rejection','Acceptance','Delta Div.','Trapped Part.'])">Absorption</button>
+      <button class="pbtn" id="pmod-Breakout Cont." onclick="pickPrep('model','Breakout Cont.',['Absorption','Breakout Cont.','Rejection','Acceptance','Delta Div.','Trapped Part.'])">Breakout Cont.</button>
+      <button class="pbtn" id="pmod-Rejection" onclick="pickPrep('model','Rejection',['Absorption','Breakout Cont.','Rejection','Acceptance','Delta Div.','Trapped Part.'])">Rejection</button>
+      <button class="pbtn" id="pmod-Acceptance" onclick="pickPrep('model','Acceptance',['Absorption','Breakout Cont.','Rejection','Acceptance','Delta Div.','Trapped Part.'])">Acceptance</button>
+      <button class="pbtn" id="pmod-Delta Div." onclick="pickPrep('model','Delta Div.',['Absorption','Breakout Cont.','Rejection','Acceptance','Delta Div.','Trapped Part.'])">Delta Div.</button>
+      <button class="pbtn" id="pmod-Trapped Part." onclick="pickPrep('model','Trapped Part.',['Absorption','Breakout Cont.','Rejection','Acceptance','Delta Div.','Trapped Part.'])">Trapped Part.</button>
+    </div>
+    <div style="font-size:11px;font-weight:600;color:var(--text3);margin-bottom:5px">Direction bias for model</div>
+    <div style="display:flex;gap:6px">
+      <button class="pbtn pbtn-g" id="pdir-Long" onclick="pickPrep('direction','Long',['Long','Short','Both'])">Long</button>
+      <button class="pbtn pbtn-r" id="pdir-Short" onclick="pickPrep('direction','Short',['Long','Short','Both'])">Short</button>
+      <button class="pbtn" id="pdir-Both" onclick="pickPrep('direction','Both',['Long','Short','Both'])">Both sides</button>
+    </div>
   </div>
 </div>
 
-</div><!-- end guide page -->
+<!-- Row 4: Plan + Rules check -->
+<div class="g2" style="margin-bottom:14px">
+  <div class="card">
+    <div class="lbl" style="margin-bottom:8px">Today's plan & focus</div>
+    <textarea id="prep-plan" placeholder="What's the game plan today? What are you watching, what will you avoid, any specific setups you're waiting for…" oninput="prepFieldChange()" style="width:100%;min-height:110px;padding:10px 12px;border:1px solid var(--border2);border-radius:6px;font-size:13px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg2);resize:vertical;outline:none;line-height:1.6"></textarea>
+  </div>
+  <div class="card">
+    <div class="lbl" style="margin-bottom:10px">Pre-session rules check</div>
+    <div id="prep-rules-list"></div>
+  </div>
+</div>
+
+<!-- Confluence score -->
+<div class="card" style="margin-bottom:14px">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+    <div class="lbl">Confluence score estimate</div>
+    <div style="display:flex;align-items:baseline;gap:6px">
+      <span style="font-family:'Fraunces',serif;font-size:32px;font-weight:400;color:var(--text)" id="conf-score">0</span>
+      <span style="font-size:13px;color:var(--text3)">/ 11</span>
+      <span id="conf-verdict" style="font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;margin-left:6px"></span>
+    </div>
+  </div>
+  <div id="conf-items" style="display:flex;flex-direction:column;gap:6px"></div>
+</div>
+
+<!-- Previous prep history -->
+<div class="card">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+    <div class="lbl">Recent prep history</div>
+    <span style="font-size:12px;color:var(--text3)">Last 5 sessions</span>
+  </div>
+  <div id="prep-history"></div>
+</div>
+
+</div><!-- end prep page -->
 
 </div><!-- end wrap -->
 
 <div id="toast"></div>
 
 <script>
-/* ── NAV ── */
+/* ══════════════════════════════════════════
+   CONFIG
+══════════════════════════════════════════ */
+var SB_URL = 'https://lxjshzntlswwiebfusvl.supabase.co';
+var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx4anNoem50bHN3d2llYmZ1c3ZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0OTg2NzEsImV4cCI6MjA5MTA3NDY3MX0.SyO0L27l9r7Q2Nn499FH6kcpqk8zGG_gLhlJr8-xlHc';
+
+function sbHeaders() {
+  return { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' };
+}
+
+/* ══════════════════════════════════════════
+   AUTH
+══════════════════════════════════════════ */
+var PASSWORDS = { enz: 'Glock19', abd: 'Germany1' };
+var CURRENT_USER = null;
+var LOGIN_TARGET = null;
+
+function selectUser(who) {
+  LOGIN_TARGET = who;
+  document.getElementById('login-pw-section').style.display = 'block';
+  document.getElementById('login-pw-input').value = '';
+  document.getElementById('login-pw-err').textContent = '';
+  document.getElementById('login-pw-input').focus();
+}
+
+function submitLogin() {
+  var pw = document.getElementById('login-pw-input').value;
+  if (pw === PASSWORDS[LOGIN_TARGET]) {
+    finishLogin(LOGIN_TARGET);
+  } else {
+    document.getElementById('login-pw-err').textContent = 'Wrong password — try again';
+    document.getElementById('login-pw-input').value = '';
+    document.getElementById('login-pw-input').focus();
+  }
+}
+
+function loginGuest() { finishLogin('guest'); }
+
+function finishLogin(who) {
+  CURRENT_USER = who;
+  document.getElementById('login-overlay').style.display = 'none';
+  var badge = document.getElementById('ubadge-label');
+  var userBadge = document.getElementById('user-badge');
+  if (who === 'guest') {
+    badge.textContent = 'Guest (read-only)';
+    badge.className = 'ubadge ubadge-guest';
+  } else if (who === 'enz') {
+    badge.textContent = 'Enz';
+    badge.className = 'ubadge ubadge-enz';
+  } else {
+    badge.textContent = 'Abdullah';
+    badge.className = 'ubadge ubadge-abd';
+  }
+  userBadge.style.display = 'flex';
+  renderCL('enz');
+  renderCL('abd');
+  renderNotes();
+}
+
+function doLogout() {
+  CURRENT_USER = null;
+  LOGIN_TARGET = null;
+  document.getElementById('login-overlay').style.display = 'flex';
+  document.getElementById('login-pw-section').style.display = 'none';
+  document.getElementById('login-pw-err').textContent = '';
+  document.getElementById('user-badge').style.display = 'none';
+}
+
+function canEdit(w) {
+  if (!CURRENT_USER || CURRENT_USER === 'guest') return false;
+  return CURRENT_USER === w;
+}
+
+function showUnlockPrompt(w) {
+  var who = w === 'enz' ? 'Enz' : 'Abdullah';
+  var pw = prompt('Enter ' + who + "'s password to edit:");
+  if (pw === null) return;
+  if (pw === PASSWORDS[w]) {
+    CURRENT_USER = w;
+    var badge = document.getElementById('ubadge-label');
+    badge.textContent = who;
+    badge.className = 'ubadge ' + (w === 'enz' ? 'ubadge-enz' : 'ubadge-abd');
+    renderCL('enz');
+    renderCL('abd');
+    toast('Switched to ' + who, 'g');
+  } else {
+    toast('Wrong password', 'r');
+  }
+}
+
+/* ══════════════════════════════════════════
+   NAV
+══════════════════════════════════════════ */
 function go(id, el) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('on'))
-  document.querySelectorAll('.ntab').forEach(t => t.classList.remove('on'))
-  document.getElementById('pg-' + id).classList.add('on')
-  el.classList.add('on')
-  if (id === 'enz') renderCL('enz')
-  if (id === 'abd') renderCL('abd')
+  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('on'); });
+  document.querySelectorAll('.ntab').forEach(function(t) { t.classList.remove('on'); });
+  document.getElementById('pg-' + id).classList.add('on');
+  el.classList.add('on');
+  if (id === 'enz') renderCL('enz');
+  if (id === 'abd') renderCL('abd');
+  if (id === 'notes') renderNotes();
+  if (id === 'prep') initPrepPage();
 }
 
-/* ── MODEL TABS ── */
 function mdl(i) {
-  document.querySelectorAll('.mtab').forEach((t, j) => t.classList.toggle('on', j === i))
-  document.querySelectorAll('.mp').forEach((p, j) => p.classList.toggle('on', j === i))
+  document.querySelectorAll('.mtab').forEach(function(t, j) { t.classList.toggle('on', j === i); });
+  document.querySelectorAll('.mp').forEach(function(p, j) { p.classList.toggle('on', j === i); });
 }
 
-/* ── CHECKLIST ── */
-const DEFAULT = [
+/* ══════════════════════════════════════════
+   SUPABASE HELPERS
+══════════════════════════════════════════ */
+async function sbFetch(path) {
+  try {
+    var res = await fetch(SB_URL + path, { headers: sbHeaders() });
+    if (!res.ok) return null;
+    return await res.json();
+  } catch(e) { return null; }
+}
+
+async function sbPost(path, body) {
+  try {
+    await fetch(SB_URL + path, {
+      method: 'POST',
+      headers: Object.assign({}, sbHeaders(), { 'Prefer': 'resolution=merge-duplicates' }),
+      body: JSON.stringify(body)
+    });
+  } catch(e) {}
+}
+
+async function sbDelete(path) {
+  try {
+    await fetch(SB_URL + path, { method: 'DELETE', headers: sbHeaders() });
+  } catch(e) {}
+}
+
+/* ══════════════════════════════════════════
+   CHECKLIST DATA
+══════════════════════════════════════════ */
+var DEFAULT = [
   { s:'AMT Foundation', t:'Market state confirmed — OUT OF BALANCE (trend) or FAILED BREAKOUT (mean reversion)' },
   { s:'AMT Foundation', t:'Session selected — NY → Trend Model · London → Mean Reversion' },
   { s:'Bias', t:'VWAP confirmed — price clearly above (long) or below (short)' },
@@ -908,135 +1305,507 @@ const DEFAULT = [
   { s:'Entry', t:'Entry type decided: candle close / reaction candle close / limit at LVN' },
   { s:'Entry', t:'Target identified: next balance POC or next LVN / HTF level' },
   { s:'Risk', t:'Stop calculated: beyond aggressive print + 1–2 tick buffer (max 15 ticks ES)' },
-  { s:'Risk', t:'Under 5 trades today · under 3 losses today · drawdown under 2%' },
-]
+  { s:'Risk', t:'Under 5 trades today · under 3 losses today · drawdown under 2%' }
+];
 
-const CATS = { 'AMT Foundation':'#ea580c:#fff7ed:#fed7aa', 'Bias':'#2563eb:#eff6ff:#bfdbfe', 'Setup':'#16a34a:#f0fdf4:#bbf7d0', 'Model':'#d97706:#fffbeb:#fde68a', 'Delta':'#dc2626:#fef2f2:#fecaca', 'Entry':'#7c3aed:#f5f3ff:#ddd6fe', 'Risk':'#dc2626:#fef2f2:#fecaca', 'Custom':'#5c5a55:#f4f3ef:#d4d1ca' }
+var CATS = {
+  'AMT Foundation':'#ea580c:#fff7ed:#fed7aa',
+  'Bias':'#2563eb:#eff6ff:#bfdbfe',
+  'Setup':'#16a34a:#f0fdf4:#bbf7d0',
+  'Model':'#d97706:#fffbeb:#fde68a',
+  'Delta':'#dc2626:#fef2f2:#fecaca',
+  'Entry':'#7c3aed:#f5f3ff:#ddd6fe',
+  'Risk':'#dc2626:#fef2f2:#fecaca',
+  'Custom':'#5c5a55:#f4f3ef:#d4d1ca'
+};
 
-function cc(cat) { const v=(CATS[cat]||CATS.Custom).split(':'); return {c:v[0],bg:v[1],br:v[2]} }
-function itemsKey(w){return'cl_items_'+w}
-function stateKey(w){return'cl_state_'+w}
-function editKey(w){return'cl_edit_'+w}
-function getItems(w){const r=localStorage.getItem(itemsKey(w));return r?JSON.parse(r):JSON.parse(JSON.stringify(DEFAULT))}
-function saveItems(w,d){localStorage.setItem(itemsKey(w),JSON.stringify(d))}
-function getState(w){const r=localStorage.getItem(stateKey(w));return r?JSON.parse(r):{}}
-function saveState(w,s){localStorage.setItem(stateKey(w),JSON.stringify(s))}
-function isEdit(w){return localStorage.getItem(editKey(w))==='1'}
-function setEdit(w,v){localStorage.setItem(editKey(w),v?'1':'0')}
-function chkSVG(){return`<svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 5l2.5 2.5L8 3" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`}
+function cc(cat) { var v=(CATS[cat]||CATS.Custom).split(':'); return {c:v[0],bg:v[1],br:v[2]}; }
 
+var MEM = { enz: { items: null, checked: {} }, abd: { items: null, checked: {} } };
+var EDIT_STATE = { enz: false, abd: false };
+
+function getItems(w) { return MEM[w].items || JSON.parse(JSON.stringify(DEFAULT)); }
+function getState(w) { return MEM[w].checked || {}; }
+
+async function saveToSupabase(w) {
+  await sbPost('/rest/v1/checklists', {
+    user_id: w,
+    items: MEM[w].items,
+    checked: MEM[w].checked,
+    updated_at: new Date().toISOString()
+  });
+}
+
+async function loadFromSupabase(w) {
+  var data = await sbFetch('/rest/v1/checklists?user_id=eq.' + w + '&limit=1');
+  if (data && data[0] && data[0].items) {
+    MEM[w].items = data[0].items;
+    MEM[w].checked = data[0].checked || {};
+  } else {
+    MEM[w].items = JSON.parse(JSON.stringify(DEFAULT));
+    MEM[w].checked = {};
+  }
+}
+
+function chkSVG() {
+  return '<svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 5l2.5 2.5L8 3" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+}
+
+/* ══════════════════════════════════════════
+   RENDER CHECKLIST
+══════════════════════════════════════════ */
 function renderCL(w) {
-  const items=getItems(w), state=getState(w), edit=isEdit(w)
-  const done=items.filter((_,i)=>!!state[i]).length, total=items.length
-  const pct=total?Math.round(done/total*100):0
-  const pcol=pct<50?'var(--red)':pct<85?'var(--amber)':'var(--green)'
-  const lbl=w==='enz'?'Enz':'Abdullah'
-  const dcol=w==='enz'?'#2563eb':'#7c3aed'
+  var items = getItems(w);
+  var state = getState(w);
+  var editable = canEdit(w);
+  var edit = EDIT_STATE[w] && editable;
+  var done = items.filter(function(_, i) { return !!state[i]; }).length;
+  var total = items.length;
+  var pct = total ? Math.round(done / total * 100) : 0;
+  var pcol = pct < 50 ? 'var(--red)' : pct < 85 ? 'var(--amber)' : 'var(--green)';
+  var lbl = w === 'enz' ? 'Enz' : 'Abdullah';
+  var dcol = w === 'enz' ? '#2563eb' : '#7c3aed';
 
-  // group
-  const grps={}
-  items.forEach((item,i)=>{if(!grps[item.s])grps[item.s]=[];grps[item.s].push({...item,i})})
+  var grps = {};
+  items.forEach(function(item, i) {
+    if (!grps[item.s]) grps[item.s] = [];
+    grps[item.s].push({ s: item.s, t: item.t, i: i });
+  });
 
-  let secs=''
-  Object.entries(grps).forEach(([sec,sits])=>{
-    const k=cc(sec)
-    let rows=sits.map(item=>{
-      const on=!!state[item.i]
-      return `<div class="ci ${on?'on':''}" id="${w}-r${item.i}" ${edit?'':` onclick="tog('${w}',${item.i})"`}>
-        <div class="ci-box" id="${w}-b${item.i}" data-on="${on?'1':'0'}">${on?chkSVG():''}</div>
-        <span class="ci-cat" style="background:${k.bg};color:${k.c};border-color:${k.br}">${item.s}</span>
-        <span class="ci-txt">${item.t}</span>
-        ${edit?`<button class="xbtn" onclick="delItem('${w}',${item.i})" title="Remove">×</button>`:''}
-      </div>`
-    }).join('')
-    secs+=`<div class="cl-sec"><div class="cl-stit">${sec}</div>${rows}</div>`
-  })
+  var secs = '';
+  Object.keys(grps).forEach(function(sec) {
+    var sits = grps[sec];
+    var k = cc(sec);
+    var rows = sits.map(function(item) {
+      var on = !!state[item.i];
+      var clickAttr = '';
+      if (!edit) {
+        if (editable) {
+          clickAttr = 'onclick="tog(\'' + w + '\',' + item.i + ')"';
+        } else {
+          clickAttr = 'onclick="showUnlockPrompt(\'' + w + '\')"';
+        }
+      }
+      var delBtn = edit ? '<button class="xbtn" onclick="delItem(\'' + w + '\',' + item.i + ')" title="Remove">x</button>' : '';
+      return '<div class="ci ' + (on ? 'on' : '') + '" id="' + w + '-r' + item.i + '" ' + clickAttr + '>' +
+        '<div class="ci-box" id="' + w + '-b' + item.i + '">' + (on ? chkSVG() : '') + '</div>' +
+        '<span class="ci-cat" style="background:' + k.bg + ';color:' + k.c + ';border-color:' + k.br + '">' + item.s + '</span>' +
+        '<span class="ci-txt">' + item.t + '</span>' +
+        delBtn +
+        '</div>';
+    }).join('');
+    secs += '<div class="cl-sec"><div class="cl-stit">' + sec + '</div>' + rows + '</div>';
+  });
 
-  const addForm=edit?`<div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px;margin-top:6px">
-    <div class="lbl">Add new item</div>
-    <div class="arow">
-      <select id="${w}-ncat"><option>AMT Foundation</option><option>Bias</option><option>Setup</option><option>Model</option><option>Delta</option><option>Entry</option><option>Risk</option><option>Custom</option></select>
-      <input type="text" id="${w}-ntxt" placeholder="Type your checklist item…" onkeydown="if(event.key==='Enter')addItem('${w}')"/>
-      <button class="btn btn-p" onclick="addItem('${w}')">Add</button>
-    </div>
-  </div>`:'';
+  var addForm = '';
+  if (edit) {
+    addForm = '<div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px;margin-top:6px">' +
+      '<div class="lbl">Add new item</div>' +
+      '<div class="arow">' +
+      '<select id="' + w + '-ncat"><option>AMT Foundation</option><option>Bias</option><option>Setup</option><option>Model</option><option>Delta</option><option>Entry</option><option>Risk</option><option>Custom</option></select>' +
+      '<input type="text" id="' + w + '-ntxt" placeholder="Type your checklist item..." />' +
+      '<button class="btn btn-p" onclick="addItem(\'' + w + '\')">Add</button>' +
+      '</div></div>';
+  }
 
-  const statusMsg=done===total&&total>0?`<span class="cl-msg">✓ All clear — you may enter</span>`:done>=Math.floor(total*.8)&&total>0?`<span style="font-size:12px;font-weight:600;color:var(--amber)">Almost — check remaining</span>`:''
+  var statusMsg = '';
+  if (done === total && total > 0) {
+    statusMsg = '<span class="cl-msg">All clear — you may enter</span>';
+  } else if (done >= Math.floor(total * 0.8) && total > 0) {
+    statusMsg = '<span style="font-size:12px;font-weight:600;color:var(--amber)">Almost — check remaining</span>';
+  }
 
-  document.getElementById(w+'-wrap').innerHTML=`
-    <div class="clh">
-      <div>
-        <div class="cln" style="color:${dcol}">${lbl} · Personal Checklist</div>
-        <div class="clh-t">Pre-Trade Checklist</div>
-        <div class="clh-s">Run every item before entering. Progress saves in your browser.</div>
-      </div>
-      <div class="cl-right">
-        <div class="cl-pct" style="color:${pcol}">${pct}%</div>
-        <div class="cl-cnt">${done} / ${total} complete</div>
-        <div class="pbar"><div class="pfill" style="width:${pct}%;background:${pcol}"></div></div>
-      </div>
-    </div>
-    ${edit?`<div class="ebanner"><span>✏️ Edit mode — tap × to remove items, or add below</span><button class="btn btn-a" onclick="toggleEdit('${w}')">Done editing</button></div>`:''}
-    ${secs}
-    ${addForm}
-    <div class="cl-act">
-      <button class="btn" onclick="resetCL('${w}')">Reset all</button>
-      <button class="btn btn-g" onclick="checkAll('${w}')">Check all</button>
-      <button class="btn ${edit?'btn-a':''}" onclick="toggleEdit('${w}')">${edit?'Done editing':'✏️ Edit checklist'}</button>
-      ${statusMsg}
-    </div>`
+  var readonlyBanner = '';
+  if (!editable && CURRENT_USER) {
+    readonlyBanner = '<div class="cl-readonly-banner">Read-only — this is ' + lbl + "'s checklist" +
+      '<button class="cl-unlock-btn" onclick="showUnlockPrompt(\'' + w + '\')">Unlock to edit</button></div>';
+  }
+
+  var editBanner = edit ? '<div class="ebanner"><span>Edit mode — tap x to remove items, or add below</span><button class="btn btn-a" onclick="toggleEdit(\'' + w + '\')">Done editing</button></div>' : '';
+
+  var actionBtns = editable
+    ? '<button class="btn" onclick="resetCL(\'' + w + '\')">Reset all</button>' +
+      '<button class="btn btn-g" onclick="checkAll(\'' + w + '\')">Check all</button>' +
+      '<button class="btn ' + (edit ? 'btn-a' : '') + '" onclick="toggleEdit(\'' + w + '\')">' + (edit ? 'Done editing' : 'Edit checklist') + '</button>'
+    : '<span style="font-size:12px;color:var(--text3)">Sign in as ' + lbl + ' to interact</span>';
+
+  document.getElementById(w + '-wrap').innerHTML =
+    '<div class="clh">' +
+      '<div>' +
+        '<div class="cln" style="color:' + dcol + '">' + lbl + ' · Personal Checklist</div>' +
+        '<div class="clh-t">Pre-Trade Checklist</div>' +
+        '<div class="clh-s">' + (editable ? 'Run every item before entering. Progress syncs via Supabase.' : 'Viewing ' + lbl + "'s checklist — read only.") + '</div>' +
+      '</div>' +
+      '<div class="cl-right">' +
+        '<div class="cl-pct" style="color:' + pcol + '">' + pct + '%</div>' +
+        '<div class="cl-cnt">' + done + ' / ' + total + ' complete</div>' +
+        '<div class="pbar"><div class="pfill" style="width:' + pct + '%;background:' + pcol + '"></div></div>' +
+      '</div>' +
+    '</div>' +
+    readonlyBanner +
+    editBanner +
+    secs +
+    addForm +
+    '<div class="cl-act">' + actionBtns + statusMsg + '</div>';
 }
 
-function tog(w,i){
-  const state=getState(w); state[i]=!state[i]; saveState(w,state); renderCL(w)
-}
-function resetCL(w){saveState(w,{});renderCL(w);toast('Checklist reset')}
-function checkAll(w){
-  const items=getItems(w),s={}
-  items.forEach((_,i)=>{s[i]=true})
-  saveState(w,s);renderCL(w)
-}
-function toggleEdit(w){setEdit(w,!isEdit(w));renderCL(w)}
-function delItem(w,idx){
-  const items=getItems(w),state=getState(w)
-  items.splice(idx,1)
-  const ns={}
-  Object.entries(state).forEach(([k,v])=>{const ki=parseInt(k);if(ki<idx)ns[ki]=v;else if(ki>idx)ns[ki-1]=v})
-  saveItems(w,items);saveState(w,ns);renderCL(w);toast('Item removed')
-}
-function addItem(w){
-  const cat=document.getElementById(w+'-ncat')?.value
-  const txt=document.getElementById(w+'-ntxt')?.value?.trim()
-  if(!txt){toast('Enter item text','r');return}
-  const items=getItems(w);items.push({s:cat,t:txt})
-  saveItems(w,items);renderCL(w);toast('Item added','g')
+function tog(w, i) {
+  var state = getState(w);
+  state[i] = !state[i];
+  MEM[w].checked = state;
+  saveToSupabase(w);
+  renderCL(w);
 }
 
-// ══════════════════════════════════════════════
-// CONFIG
-// ══════════════════════════════════════════════
-  const CONFIG = {
-        SUPABASE_URL: 'https://lxjshzntlswwiebfusvl.supabase.co',
-        SUPABASE_KEY: 'sb_publishable_pykqsa0xaAux3ib2U21lkA_yjDBPVG1',
-        CLOUDINARY_CLOUD: 'dkazzkpxb',
-        CLOUDINARY_PRESET: 'yesfugazzi',
-    };
-// ══════════════════════════════════════════════
+function resetCL(w) { MEM[w].checked = {}; saveToSupabase(w); renderCL(w); toast('Checklist reset'); }
 
-    const USE_SB = CONFIG.SUPABASE_URL !== 'YOUR_SUPABASE_URL';
-    const USE_CDN = CONFIG.CLOUDINARY_CLOUD !== 'YOUR_CLOUD_NAME';
-
-/* ── TOAST ── */
-let tt=null
-function toast(msg,type=''){
-  const el=document.getElementById('toast')
-  clearTimeout(tt);el.textContent=msg
-  el.className='on'+(type==='g'?' tg':type==='r'?' tr':'')
-  tt=setTimeout(()=>{el.className=''},3000)
+function checkAll(w) {
+  var items = getItems(w);
+  var s = {};
+  items.forEach(function(_, i) { s[i] = true; });
+  MEM[w].checked = s;
+  saveToSupabase(w);
+  renderCL(w);
 }
 
-/* ── INIT ── */
-renderCL('enz');renderCL('abd')
+function toggleEdit(w) { EDIT_STATE[w] = !EDIT_STATE[w]; renderCL(w); }
+
+function delItem(w, idx) {
+  var items = getItems(w);
+  var state = getState(w);
+  items.splice(idx, 1);
+  var ns = {};
+  Object.keys(state).forEach(function(k) {
+    var ki = parseInt(k);
+    if (ki < idx) ns[ki] = state[k];
+    else if (ki > idx) ns[ki - 1] = state[k];
+  });
+  MEM[w].items = items;
+  MEM[w].checked = ns;
+  saveToSupabase(w);
+  renderCL(w);
+  toast('Item removed');
+}
+
+function addItem(w) {
+  var cat = document.getElementById(w + '-ncat');
+  var txt = document.getElementById(w + '-ntxt');
+  if (!cat || !txt || !txt.value.trim()) { toast('Enter item text', 'r'); return; }
+  var items = getItems(w);
+  items.push({ s: cat.value, t: txt.value.trim() });
+  MEM[w].items = items;
+  saveToSupabase(w);
+  renderCL(w);
+  toast('Item added', 'g');
+}
+
+/* ══════════════════════════════════════════
+   NOTES
+══════════════════════════════════════════ */
+var NOTES = [];
+var NOTES_FILTER = 'all';
+
+async function loadNotes() {
+  var data = await sbFetch('/rest/v1/notes?order=created_at.desc');
+  NOTES = Array.isArray(data) ? data : [];
+}
+
+async function saveNote(note) {
+  await sbPost('/rest/v1/notes', note);
+}
+
+async function deleteNote(id) {
+  await sbDelete('/rest/v1/notes?id=eq.' + id);
+}
+
+var CAT_EMOJI = { Mistake:'🔴', Learning:'🟢', Pattern:'🔵', Rule:'🟡', Observation:'⚪' };
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function renderNotes() {
+  var list = document.getElementById('notes-list');
+  if (!list) return;
+  var filtered = NOTES_FILTER === 'all' ? NOTES : NOTES.filter(function(n) { return n.category === NOTES_FILTER; });
+  if (!filtered.length) {
+    list.innerHTML = '<div style="padding:56px;text-align:center;color:var(--text3);font-size:13px;background:var(--bg2);border:1px solid var(--border);border-radius:10px">' +
+      (NOTES_FILTER === 'all' ? 'No notes yet — add your first one above.' : 'No entries in this category yet.') + '</div>';
+    return;
+  }
+  list.innerHTML = filtered.map(function(n) {
+    var d = n.created_at ? new Date(n.created_at).toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'}) : n.date || '';
+    return '<div class="note-card">' +
+      '<div class="note-card-top">' +
+        '<span class="ncat-pill ncat-' + n.category + '">' + (CAT_EMOJI[n.category] || '') + ' ' + n.category + '</span>' +
+        (n.who ? '<span class="nwho-pill">' + n.who + '</span>' : '') +
+      '</div>' +
+      '<div class="note-card-body">' + esc(n.body) + '</div>' +
+      '<div class="note-card-footer">' +
+        '<span class="note-card-meta">' + d + '</span>' +
+        '<button class="note-del" onclick="confirmDel(\'' + n.id + '\')">Delete</button>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+async function addNote() {
+  var body = document.getElementById('note-text').value.trim();
+  if (!body) { toast('Write something first', 'r'); return; }
+  var note = {
+    category: document.getElementById('note-cat').value,
+    who: document.getElementById('note-who').value,
+    body: body,
+    date: document.getElementById('note-date').value,
+    created_at: new Date().toISOString()
+  };
+  document.getElementById('note-saving').textContent = 'Saving...';
+  await saveNote(note);
+  await loadNotes();
+  renderNotes();
+  document.getElementById('note-text').value = '';
+  document.getElementById('note-saving').textContent = '';
+  toast('Note saved', 'g');
+}
+
+async function confirmDel(id) {
+  if (!confirm('Delete this note?')) return;
+  NOTES = NOTES.filter(function(n) { return n.id !== id; });
+  renderNotes();
+  await deleteNote(id);
+  toast('Deleted');
+}
+
+function filterNotes(cat, btn) {
+  NOTES_FILTER = cat;
+  document.querySelectorAll('.nfbtn').forEach(function(b) { b.classList.remove('on'); });
+  btn.classList.add('on');
+  renderNotes();
+}
+
+function setTodayDate() {
+  var el = document.getElementById('note-date');
+  if (el) el.value = new Date().toISOString().split('T')[0];
+}
+
+/* ══════════════════════════════════════════
+   DAILY PREP
+══════════════════════════════════════════ */
+var STOP_MAP = { ES:'15 ticks', NQ:'40 ticks', GC:'25 ticks', Other:'—' };
+var PREP_RULES = [
+  'Pre-market map done — PDH/PDL, ON H/L, weekly H/L, gaps',
+  'All 5 VP layers loaded',
+  'VWAP and PSVP both checked — bias confirmed or conflict noted',
+  'LVN identified and alert set before it',
+  'Model identified at a VP level',
+  'Trade count = 0, losses = 0, drawdown = 0%'
+];
+var CONF_ITEMS = [
+  'VAH/VAL alignment with entry','POC proximity','LVN at entry zone',
+  'Delta divergence present','CVD in trade direction','Imbalance / stacked imbalance',
+  'Shelf or Ledge structure','Big order bubble at LVN','Reversal time window active',
+  'Bias confirmed (VWAP + PSVP agree)','Model clearly identified'
+];
+var PREP_FIELDS = ['session','state','approach','vwap','psvp','instrument','model','direction'];
+
+var PREP = {};
+var PREP_RULES_STATE = {};
+var CONF_STATE = {};
+var PREP_HISTORY = [];
+
+async function loadPrep() {
+  var data = await sbFetch('/rest/v1/daily_prep?order=date.desc&limit=5');
+  if (!Array.isArray(data)) { PREP_HISTORY = []; return; }
+  PREP_HISTORY = data;
+  var today = new Date().toISOString().split('T')[0];
+  var row = data.find(function(r) { return r.date === today; });
+  if (row) {
+    PREP = row.fields || {};
+    PREP_RULES_STATE = row.rules_state || {};
+    CONF_STATE = row.conf_state || {};
+    function setVal(id, val) { var el = document.getElementById(id); if (el) el.value = val || ''; }
+    setVal('pl-vah', row.levels && row.levels.vah);
+    setVal('pl-res2', row.levels && row.levels.res2);
+    setVal('pl-poc', row.levels && row.levels.poc);
+    setVal('pl-pivot2', row.levels && row.levels.pivot2);
+    setVal('pl-val', row.levels && row.levels.val);
+    setVal('pl-sup2', row.levels && row.levels.sup2);
+    setVal('pl-lvn', row.levels && row.levels.lvn);
+    setVal('prep-plan', row.plan);
+  }
+}
+
+async function savePrep() {
+  var today = new Date().toISOString().split('T')[0];
+  function getVal(id) { var el = document.getElementById(id); return el ? el.value : ''; }
+  var levels = { vah:getVal('pl-vah'), res2:getVal('pl-res2'), poc:getVal('pl-poc'), pivot2:getVal('pl-pivot2'), val:getVal('pl-val'), sup2:getVal('pl-sup2'), lvn:getVal('pl-lvn') };
+  var statusEl = document.getElementById('prep-sync-status');
+  if (statusEl) statusEl.textContent = 'Saving...';
+  await sbPost('/rest/v1/daily_prep', { date:today, fields:PREP, levels:levels, rules_state:PREP_RULES_STATE, conf_state:CONF_STATE, plan:getVal('prep-plan') });
+  if (statusEl) { statusEl.textContent = 'Saved'; setTimeout(function() { statusEl.textContent=''; }, 2000); }
+  await loadPrep();
+  renderPrepHistory();
+  toast('Prep saved', 'g');
+}
+
+function clearPrep() {
+  if (!confirm("Clear today's prep and start fresh?")) return;
+  PREP = {}; PREP_RULES_STATE = {}; CONF_STATE = {};
+  document.querySelectorAll('.pbtn').forEach(function(b) { b.classList.remove('sel'); });
+  document.querySelectorAll('.prep-input').forEach(function(i) { i.value = ''; });
+  var plan = document.getElementById('prep-plan');
+  if (plan) plan.value = '';
+  renderPrepRules(); renderConfItems(); updateBiasResult(); updateStopDisplay();
+  toast('Cleared');
+}
+
+function pickPrep(field, val, groupArr) {
+  PREP[field] = val;
+  groupArr.forEach(function(v) {
+    var el = document.getElementById('p' + field + '-' + v);
+    if (el) el.classList.toggle('sel', v === val);
+  });
+  if (field === 'vwap' || field === 'psvp') updateBiasResult();
+  if (field === 'instrument') updateStopDisplay();
+}
+
+function updateBiasResult() {
+  var el = document.getElementById('bias-result');
+  if (!el) return;
+  var v = PREP.vwap, p = PREP.psvp;
+  if (!v || !p) { el.style.display = 'none'; return; }
+  el.style.display = 'block';
+  if (v === 'Long' && p === 'Long') {
+    el.style.cssText = 'display:block;padding:8px 12px;border-radius:6px;font-size:12px;font-weight:600;background:var(--gbg);color:var(--green);border:1px solid var(--gbr)';
+    el.textContent = 'Bias confirmed LONG — proceed';
+  } else if (v === 'Short' && p === 'Short') {
+    el.style.cssText = 'display:block;padding:8px 12px;border-radius:6px;font-size:12px;font-weight:600;background:var(--rbg);color:var(--red);border:1px solid var(--rbr)';
+    el.textContent = 'Bias confirmed SHORT — proceed';
+  } else {
+    el.style.cssText = 'display:block;padding:8px 12px;border-radius:6px;font-size:12px;font-weight:600;background:var(--abg);color:var(--amber);border:1px solid var(--abr)';
+    el.textContent = 'Conflict — VWAP and PSVP disagree. No trade.';
+  }
+}
+
+function updateStopDisplay() {
+  var el = document.getElementById('prep-stop-display');
+  if (el) el.textContent = STOP_MAP[PREP.instrument || 'ES'] || '15 ticks';
+}
+
+function prepFieldChange() {}
+
+function renderPrepRules() {
+  var el = document.getElementById('prep-rules-list');
+  if (!el) return;
+  el.innerHTML = PREP_RULES.map(function(r, i) {
+    var on = !!PREP_RULES_STATE[i];
+    return '<div class="prep-rule ' + (on ? 'checked' : '') + '" onclick="togglePrepRule(' + i + ')">' +
+      '<div class="prep-rule-box">' + (on ? '<svg width="9" height="9" viewBox="0 0 10 10"><path d="M2 5l2.5 2.5L8 3" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '') + '</div>' +
+      '<span class="prep-rule-text">' + r + '</span>' +
+      '</div>';
+  }).join('');
+}
+
+function togglePrepRule(i) {
+  PREP_RULES_STATE[i] = !PREP_RULES_STATE[i];
+  renderPrepRules();
+}
+
+function renderConfItems() {
+  var el = document.getElementById('conf-items');
+  var scoreEl = document.getElementById('conf-score');
+  var verdictEl = document.getElementById('conf-verdict');
+  if (!el) return;
+  var score = Object.values(CONF_STATE).filter(Boolean).length;
+  el.innerHTML = CONF_ITEMS.map(function(item, i) {
+    var on = !!CONF_STATE[i];
+    return '<div class="conf-item-row ' + (on ? 'conf-yes' : '') + '">' +
+      '<span style="font-size:12px;color:var(--text2)">' + item + '</span>' +
+      '<button class="conf-toggle ' + (on ? 'on' : 'off') + '" onclick="toggleConf(' + i + ')"></button>' +
+      '</div>';
+  }).join('');
+  if (scoreEl) scoreEl.textContent = score;
+  if (verdictEl) {
+    if (score <= 3) { verdictEl.textContent='Skip'; verdictEl.style.cssText='font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;margin-left:6px;background:var(--rbg);color:var(--red)'; }
+    else if (score <= 6) { verdictEl.textContent='Take'; verdictEl.style.cssText='font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;margin-left:6px;background:var(--abg);color:var(--amber)'; }
+    else { verdictEl.textContent='Best setup'; verdictEl.style.cssText='font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;margin-left:6px;background:var(--gbg);color:var(--green)'; }
+  }
+}
+
+function toggleConf(i) {
+  CONF_STATE[i] = !CONF_STATE[i];
+  renderConfItems();
+}
+
+function renderPrepHistory() {
+  var el = document.getElementById('prep-history');
+  if (!el) return;
+  if (!PREP_HISTORY.length) { el.innerHTML = '<div style="font-size:13px;color:var(--text3);padding:12px 0">No previous sessions yet.</div>'; return; }
+  el.innerHTML = PREP_HISTORY.map(function(row) {
+    var f = row.fields || {};
+    var biasOk = f.vwap && f.vwap === f.psvp;
+    var biasText = biasOk ? f.vwap : (f.vwap ? 'Conflict' : '');
+    var bBg = biasOk ? (f.vwap==='Long'?'var(--gbg)':'var(--rbg)') : 'var(--abg)';
+    var bCol = biasOk ? (f.vwap==='Long'?'var(--green)':'var(--red)') : 'var(--amber)';
+    var bBr = biasOk ? (f.vwap==='Long'?'var(--gbr)':'var(--rbr)') : 'var(--abr)';
+    return '<div class="hist-row">' +
+      '<span class="hist-date">' + (row.date||'') + '</span>' +
+      (f.session ? '<span class="hist-tag" style="background:var(--tbg);color:var(--teal);border-color:var(--tbr)">' + f.session + '</span>' : '') +
+      (f.instrument ? '<span class="hist-tag" style="background:var(--pbg);color:var(--purple);border-color:var(--pbr)">' + f.instrument + '</span>' : '') +
+      (biasText ? '<span class="hist-tag" style="background:' + bBg + ';color:' + bCol + ';border-color:' + bBr + '">' + biasText + '</span>' : '') +
+      (f.model ? '<span class="hist-tag" style="background:var(--bbg);color:var(--blue);border-color:var(--bbr)">' + f.model + '</span>' : '') +
+      (f.approach ? '<span class="hist-tag" style="background:var(--bg3);color:var(--text2);border-color:var(--border2)">' + f.approach + '</span>' : '') +
+      '</div>';
+  }).join('');
+}
+
+function restorePickBtns() {
+  PREP_FIELDS.forEach(function(field) {
+    var val = PREP[field];
+    if (!val) return;
+    document.querySelectorAll('[id^="p' + field + '-"]').forEach(function(b) { b.classList.remove('sel'); });
+    var target = document.getElementById('p' + field + '-' + val);
+    if (target) target.classList.add('sel');
+  });
+}
+
+function initPrepPage() {
+  var today = new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  var el = document.getElementById('prep-date-label');
+  if (el) el.textContent = today;
+  restorePickBtns();
+  updateBiasResult();
+  updateStopDisplay();
+  renderPrepRules();
+  renderConfItems();
+  renderPrepHistory();
+}
+
+/* ══════════════════════════════════════════
+   TOAST
+══════════════════════════════════════════ */
+var toastTimer = null;
+function toast(msg, type) {
+  var el = document.getElementById('toast');
+  clearTimeout(toastTimer);
+  el.textContent = msg;
+  el.className = 'on' + (type === 'g' ? ' tg' : type === 'r' ? ' tr' : '');
+  toastTimer = setTimeout(function() { el.className = ''; }, 3000);
+}
+
+/* ══════════════════════════════════════════
+   INIT
+══════════════════════════════════════════ */
+async function init() {
+  setTodayDate();
+  await Promise.all([
+    loadFromSupabase('enz'),
+    loadFromSupabase('abd'),
+    loadNotes(),
+    loadPrep()
+  ]);
+}
+init();
 </script>
 </body>
 </html>

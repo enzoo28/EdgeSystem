@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Edge System</title>
+<title>Edge Execution System — EES</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -28,7 +28,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 /* TOP BAR */
 #bar{position:sticky;top:0;z-index:100;background:rgba(250,250,248,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:54px}
 .logo{font-family:'Fraunces',serif;font-size:18px;color:var(--text);display:flex;align-items:center;gap:10px}
-.logo-mark{width:28px;height:28px;border-radius:6px;background:var(--text);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:11px;font-weight:700}
+.logo-mark{width:32px;height:32px;border-radius:7px;background:var(--text);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+@keyframes notifIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
 .pills{display:flex;gap:6px}
 .pill{font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:1px solid var(--border2);color:var(--text3);background:var(--bg2)}
 
@@ -210,7 +211,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 /* LOGIN OVERLAY */
 #login-overlay{position:fixed;inset:0;z-index:9000;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:20px}
 #login-box{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:40px 36px;width:100%;max-width:380px;box-shadow:0 8px 32px rgba(0,0,0,.1);text-align:center}
-.login-logo{width:44px;height:44px;border-radius:10px;background:var(--text);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-size:14px;font-weight:700;margin:0 auto 16px}
+.login-logo{width:52px;height:52px;border-radius:12px;background:var(--text);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
 .login-title{font-family:'Fraunces',serif;font-size:24px;color:var(--text);margin-bottom:4px}
 .login-sub{font-size:13px;color:var(--text3);margin-bottom:28px}
 .login-btns{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
@@ -242,8 +243,38 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 .cl-unlock-btn{font-size:11px;font-weight:600;padding:4px 10px;border-radius:5px;border:1px solid var(--border2);background:var(--bg2);color:var(--text2);cursor:pointer;font-family:'Inter',sans-serif;margin-left:auto}
 .cl-unlock-btn:hover{background:var(--bg3)}
 
-/* TOAST */
-#toast{position:fixed;bottom:22px;right:22px;z-index:9999;font-size:13px;font-weight:500;padding:11px 17px;border-radius:8px;background:var(--text);color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15);transform:translateY(60px);opacity:0;transition:all .3s;pointer-events:none}
+/* WATCHLIST */
+.wl-item{display:flex;align-items:center;gap:10px;padding:11px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;margin-bottom:7px;transition:all .15s;box-shadow:var(--sh)}
+.wl-item.hit{background:var(--bg3);border-color:var(--border);opacity:.55}
+.wl-price{font-family:'Fraunces',serif;font-size:20px;font-weight:400;color:var(--text);min-width:80px;letter-spacing:-.02em}
+.wl-item.hit .wl-price{color:var(--text3);text-decoration:line-through}
+.wl-type-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;border:1px solid;flex-shrink:0;letter-spacing:.04em}
+.wl-note-text{font-size:12px;color:var(--text2);flex:1;line-height:1.5}
+.wl-item.hit .wl-note-text{color:var(--text3)}
+.wl-meta{font-size:10px;color:var(--text3);white-space:nowrap;text-align:right;flex-shrink:0}
+.wl-actions{display:flex;gap:5px;flex-shrink:0}
+.wl-hit-btn{font-size:11px;font-weight:600;padding:4px 10px;border-radius:5px;border:1px solid var(--gbr);background:var(--gbg);color:var(--green);cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
+.wl-hit-btn:hover{background:#dcfce7}
+.wl-item.hit .wl-hit-btn{background:var(--bg3);border-color:var(--border2);color:var(--text3)}
+.wl-del-btn{font-size:11px;font-weight:600;padding:4px 8px;border-radius:5px;border:1px solid var(--rbr);background:var(--rbg);color:var(--red);cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
+.wl-del-btn:hover{background:var(--rbr)}
+.wl-section-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin:16px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.wl-empty{padding:32px;text-align:center;color:var(--text3);font-size:13px;background:var(--bg3);border-radius:8px}
+.wh-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px;box-shadow:var(--sh)}
+.wh-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.wh-date{font-size:13px;font-weight:600;color:var(--text)}
+.wh-by{font-size:11px;color:var(--text3)}
+.wh-levels{display:flex;flex-wrap:wrap;gap:6px}
+
+/* WATCHLIST TYPE COLORS */
+.wlt-VAH,.wlt-Resistance{background:var(--rbg);color:var(--red);border-color:var(--rbr)}
+.wlt-VAL,.wlt-Support{background:var(--gbg);color:var(--green);border-color:var(--gbr)}
+.wlt-POC{background:var(--abg);color:var(--amber);border-color:var(--abr)}
+.wlt-LVN{background:var(--bbg);color:var(--blue);border-color:var(--bbr)}
+.wlt-HVN{background:var(--pbg);color:var(--purple);border-color:var(--pbr)}
+.wlt-PDH{background:var(--rbg);color:var(--red);border-color:var(--rbr)}
+.wlt-PDL{background:var(--gbg);color:var(--green);border-color:var(--gbr)}
+.wlt-Custom,.wlt-Watch{background:var(--bg3);color:var(--text2);border-color:var(--border2)};bottom:22px;right:22px;z-index:9999;font-size:13px;font-weight:500;padding:11px 17px;border-radius:8px;background:var(--text);color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15);transform:translateY(60px);opacity:0;transition:all .3s;pointer-events:none}
 #toast.on{transform:translateY(0);opacity:1}
 #toast.tg{background:var(--green)}#toast.tr{background:var(--red)}
 
@@ -261,9 +292,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 <!-- ══════════ LOGIN OVERLAY ══════════ -->
 <div id="login-overlay">
   <div id="login-box">
-    <div class="login-logo">ES</div>
-    <div class="login-title">Edge System</div>
-    <div class="login-sub">Who are you?</div>
+    <div class="login-logo">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+    </div>
+    <div class="login-title">The Edge Execution System</div>
+    <div style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:20px">Brotherhood Matters</div>
     <div class="login-btns">
       <button class="login-btn login-btn-enz" onclick="selectUser('enz')">
         <span>🔵 Enz</span><span style="font-size:11px;font-weight:400;color:#1d4ed8">Enter password →</span>
@@ -284,7 +317,15 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 </div>
 
 <div id="bar">
-  <div class="logo"><div class="logo-mark">ES</div>Edge System</div>
+  <div class="logo">
+    <div class="logo-mark">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+    </div>
+    <div>
+      <div style="font-size:15px;font-weight:600;line-height:1.1;letter-spacing:-.02em">Edge Execution System</div>
+      <div style="font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);line-height:1">Brotherhood Matters</div>
+    </div>
+  </div>
   <div style="display:flex;align-items:center;gap:10px">
     <div class="pills">
       <span class="pill">ES · 15 tick stop</span>
@@ -299,11 +340,12 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 </div>
 
 <div id="nav">
-  <div class="ntab on" onclick="go('edge',this)"><span class="tdot" style="background:var(--text)"></span>Edge System</div>
+  <div class="ntab on" onclick="go('edge',this)"><span class="tdot" style="background:var(--text)"></span>EES Reference</div>
   <div class="ntab" onclick="go('enz',this)"><span class="tdot" style="background:#2563eb"></span>Enz Checklist</div>
   <div class="ntab" onclick="go('abd',this)"><span class="tdot" style="background:#7c3aed"></span>Abdullah Checklist</div>
   <div class="ntab" onclick="go('notes',this)"><span class="tdot" style="background:#0d9488"></span>Notes & Learnings</div>
   <div class="ntab" onclick="go('prep',this)"><span class="tdot" style="background:#ea580c"></span>Daily Prep</div>
+  <div class="ntab" onclick="go('watch',this)"><span class="tdot" style="background:#16a34a"></span>Watchlist</div>
 </div>
 
 <div id="wrap">
@@ -314,7 +356,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 <div class="hero">
   <div>
     <div class="hero-eye">Fabio Bootcamp + AMT Playbook — Merged</div>
-    <div class="hero-h">The OrderFlow Edge System</div>
+    <div class="hero-h">The Edge Execution System</div>
+    <div style="font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:8px">Brotherhood Matters</div>
     <div class="hero-sub">Every concept explained so it sits in your head. Every model shown visually so you recognise it live on chart. Built to be read and understood — not just referenced.</div>
     <div class="htags">
       <span class="tag tg">ES · 15 tick stop</span>
@@ -844,15 +887,30 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
   </div>
 </div>
 
+
 <div class="card" style="background:var(--bg3);margin-bottom:14px">
-  <div class="lbl">Time reversal windows — last confirmation only</div>
-  <div style="display:flex;flex-wrap:wrap;gap:5px;margin:8px 0">
-    <span class="tag ta">10:07</span><span class="tag ta">10:12</span><span class="tag ta">10:55–11:10</span>
-    <span class="tag ta">11:10–11:20</span><span class="tag ta">11:37</span><span class="tag ta">12:35</span>
-    <span class="tag ta">13:00–13:20</span><span class="tag ta">14:09</span>
+  <div class="lbl" style="margin-bottom:10px">Time reversal windows — last confirmation only</div>
+  <div class="g2" style="gap:12px;margin-bottom:10px">
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 14px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);margin-bottom:8px">🇺🇸 New York (EST / EDT)</div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px">
+        <span class="tag ta">10:07</span><span class="tag ta">10:12</span><span class="tag ta">10:55–11:10</span>
+        <span class="tag ta">11:10–11:20</span><span class="tag ta">11:37</span><span class="tag ta">12:35</span>
+        <span class="tag ta">13:00–13:20</span><span class="tag ta">14:09</span>
+      </div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 14px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:8px">🇪🇺 Europe (UTC+2 / CEST) <span style="font-size:9px;font-weight:400;color:var(--text3)">EDT+6</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px">
+        <span class="tag tb">16:07</span><span class="tag tb">16:12</span><span class="tag tb">16:55–17:10</span>
+        <span class="tag tb">17:10–17:20</span><span class="tag tb">17:37</span><span class="tag tb">18:35</span>
+        <span class="tag tb">19:00–19:20</span><span class="tag tb">20:09</span>
+      </div>
+    </div>
   </div>
   <div class="note note-r">Never enter on time alone. Final trigger only — all other confluences must already be confirmed.</div>
 </div>
+
 
 <div class="g3" style="margin-bottom:32px">
   <div style="background:var(--rbg);border:1px solid var(--rbr);border-radius:10px;padding:16px;text-align:center">
@@ -935,7 +993,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 <!-- Compose box -->
 <div class="card" style="margin-bottom:20px" id="notes-compose">
   <div class="lbl" style="margin-bottom:10px">New entry</div>
-  <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
+  <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center">
     <select id="note-cat" style="padding:7px 11px;border:1px solid var(--border2);border-radius:6px;font-size:12px;background:var(--bg2);color:var(--text);font-family:'Inter',sans-serif;outline:none">
       <option value="Mistake">🔴 Mistake</option>
       <option value="Learning">🟢 Learning</option>
@@ -948,7 +1006,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
       <option value="Abdullah">Abdullah</option>
       <option value="Both">Both</option>
     </select>
-    <input id="note-date" type="date" style="padding:7px 11px;border:1px solid var(--border2);border-radius:6px;font-size:12px;background:var(--bg2);color:var(--text);font-family:'Inter',sans-serif;outline:none"/>
+    <span style="font-size:11px;color:var(--text3)" id="note-ts-preview"></span>
   </div>
   <textarea id="note-text" placeholder="Write your note here — what happened, what you learned, what you'll do differently…" style="width:100%;min-height:90px;padding:10px 13px;border:1px solid var(--border2);border-radius:6px;font-size:13px;font-family:'Inter',sans-serif;color:var(--text);background:var(--bg2);resize:vertical;outline:none;line-height:1.6"></textarea>
   <div style="display:flex;gap:8px;margin-top:10px;align-items:center">
@@ -1144,6 +1202,76 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-
 
 </div><!-- end prep page -->
 
+<!-- ══════════ WATCHLIST PAGE ══════════ -->
+<div class="page" id="pg-watch">
+
+<div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:24px">
+  <div>
+    <div style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:4px">Pre-session</div>
+    <div style="font-family:'Fraunces',serif;font-size:28px;color:var(--text);letter-spacing:-.02em">Watchlist</div>
+    <div style="font-size:13px;color:var(--text3);margin-top:2px" id="watch-date-label"></div>
+  </div>
+  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+    <span id="watch-sync-label" style="font-size:11px;color:var(--text3)"></span>
+    <button class="btn btn-p" onclick="addLevel()">+ Add level</button>
+    <button class="btn" onclick="clearDoneLevels()">Clear hit</button>
+    <button class="btn" onclick="clearAllLevels()">Clear all</button>
+  </div>
+</div>
+
+<!-- Quick add row -->
+<div class="card" style="margin-bottom:18px">
+  <div class="lbl" style="margin-bottom:10px">Quick add</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end">
+    <div style="display:flex;flex-direction:column;gap:4px;flex:1;min-width:100px">
+      <span style="font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em">Price</span>
+      <input class="prep-input" id="wl-price" placeholder="e.g. 5312.25" onkeydown="if(event.key==='Enter')addLevel()"/>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:4px;min-width:110px">
+      <span style="font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em">Type</span>
+      <select id="wl-type" style="padding:7px 11px;border:1px solid var(--border2);border-radius:6px;font-size:13px;background:var(--bg2);color:var(--text);font-family:'Inter',sans-serif;outline:none">
+        <option value="VAH">VAH</option>
+        <option value="POC">POC</option>
+        <option value="VAL">VAL</option>
+        <option value="LVN">LVN</option>
+        <option value="HVN">HVN</option>
+        <option value="PDH">PDH</option>
+        <option value="PDL">PDL</option>
+        <option value="Support">Support</option>
+        <option value="Resistance">Resistance</option>
+        <option value="Custom">Custom</option>
+      </select>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:4px;min-width:90px">
+      <span style="font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em">Bias</span>
+      <select id="wl-bias" style="padding:7px 11px;border:1px solid var(--border2);border-radius:6px;font-size:13px;background:var(--bg2);color:var(--text);font-family:'Inter',sans-serif;outline:none">
+        <option value="">—</option>
+        <option value="Long">Long</option>
+        <option value="Short">Short</option>
+        <option value="Watch">Watch</option>
+      </select>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:4px;flex:2;min-width:160px">
+      <span style="font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em">Note (optional)</span>
+      <input class="prep-input" id="wl-note" placeholder="e.g. LVN inside imbalance, watch for absorption" onkeydown="if(event.key==='Enter')addLevel()"/>
+    </div>
+    <button class="btn btn-p" onclick="addLevel()" style="align-self:flex-end">Add</button>
+  </div>
+</div>
+
+<!-- Levels list -->
+<div id="watch-list">
+  <div style="padding:48px;text-align:center;color:var(--text3);font-size:13px">Loading...</div>
+</div>
+
+<!-- Shared log below -->
+<div style="margin-top:28px">
+  <div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:14px">Previous sessions — shared log</div>
+  <div id="watch-history"></div>
+</div>
+
+</div><!-- end watch page -->
+
 </div><!-- end wrap -->
 
 <div id="toast"></div>
@@ -1258,6 +1386,7 @@ function go(id, el) {
   if (id === 'abd') renderCL('abd');
   if (id === 'notes') renderNotes();
   if (id === 'prep') initPrepPage();
+  if (id === 'watch') initWatchPage();
 }
 
 function mdl(i) {
@@ -1623,24 +1752,28 @@ function renderNotes() {
 async function addNote() {
   var body = document.getElementById('note-text').value.trim();
   if (!body) { toast('Write something first', 'r'); return; }
-  // Auto-fill who based on logged in user
   var whoEl = document.getElementById('note-who');
   if (CURRENT_USER === 'enz') whoEl.value = 'Enz';
   else if (CURRENT_USER === 'abd') whoEl.value = 'Abdullah';
+  var now = new Date().toISOString();
   var note = {
     category: document.getElementById('note-cat').value,
     who: whoEl.value,
     body: body,
-    date: document.getElementById('note-date').value,
-    created_at: new Date().toISOString()
+    created_at: now
   };
-  document.getElementById('note-saving').textContent = 'Saving...';
+  var savingEl = document.getElementById('note-saving');
+  if (savingEl) savingEl.textContent = 'Saving...';
   await saveNote(note);
   await loadNotes();
   renderNotes();
   document.getElementById('note-text').value = '';
-  document.getElementById('note-saving').textContent = '';
+  if (savingEl) savingEl.textContent = '';
+  // Update timestamp preview
+  var tsEl = document.getElementById('note-ts-preview');
+  if (tsEl) tsEl.textContent = '';
   toast('Note saved — visible to everyone', 'g');
+  showNotification('New note by ' + whoEl.value, document.getElementById('note-cat').value);
 }
 
 async function confirmDel(id) {
@@ -1659,8 +1792,8 @@ function filterNotes(cat, btn) {
 }
 
 function setTodayDate() {
-  var el = document.getElementById('note-date');
-  if (el) el.value = new Date().toISOString().split('T')[0];
+  var tsEl = document.getElementById('note-ts-preview');
+  if (tsEl) tsEl.textContent = 'Will be saved as: ' + fmtDT(new Date().toISOString());
 }
 
 /* ══════════════════════════════════════════
@@ -1737,6 +1870,8 @@ function clearPrep() {
 
 function pickPrep(field, val, groupArr) {
   PREP[field] = val;
+  PREP[field + '_by'] = CURRENT_USER === 'enz' ? 'Enz' : CURRENT_USER === 'abd' ? 'Abdullah' : 'Guest';
+  PREP[field + '_at'] = new Date().toISOString();
   groupArr.forEach(function(v) {
     var el = document.getElementById('p' + field + '-' + v);
     if (el) el.classList.toggle('sel', v === val);
@@ -1773,17 +1908,32 @@ function prepFieldChange() {}
 function renderPrepRules() {
   var el = document.getElementById('prep-rules-list');
   if (!el) return;
+  var canCheck = CURRENT_USER && CURRENT_USER !== 'guest';
   el.innerHTML = PREP_RULES.map(function(r, i) {
-    var on = !!PREP_RULES_STATE[i];
-    return '<div class="prep-rule ' + (on ? 'checked' : '') + '" onclick="togglePrepRule(' + i + ')">' +
+    var entry = PREP_RULES_STATE[i] || {};
+    var on = entry === true || entry.checked === true;
+    var by = entry.by || '';
+    var at = entry.at ? ' · ' + fmtDT(entry.at) : '';
+    var meta = (by || at) ? '<div style="font-size:10px;color:var(--green);margin-top:2px">' + by + at + '</div>' : '';
+    return '<div class="prep-rule ' + (on ? 'checked' : '') + '" ' + (canCheck ? 'onclick="togglePrepRule(' + i + ')"' : '') + ' style="' + (!canCheck?'cursor:default':'') + '">' +
       '<div class="prep-rule-box">' + (on ? '<svg width="9" height="9" viewBox="0 0 10 10"><path d="M2 5l2.5 2.5L8 3" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>' : '') + '</div>' +
-      '<span class="prep-rule-text">' + r + '</span>' +
+      '<div style="flex:1"><span class="prep-rule-text">' + r + '</span>' + (on ? meta : '') + '</div>' +
       '</div>';
   }).join('');
 }
 
 function togglePrepRule(i) {
-  PREP_RULES_STATE[i] = !PREP_RULES_STATE[i];
+  var entry = PREP_RULES_STATE[i] || {};
+  var on = entry === true || entry.checked === true;
+  if (!on) {
+    PREP_RULES_STATE[i] = {
+      checked: true,
+      by: CURRENT_USER === 'enz' ? 'Enz' : CURRENT_USER === 'abd' ? 'Abdullah' : 'Guest',
+      at: new Date().toISOString()
+    };
+  } else {
+    PREP_RULES_STATE[i] = { checked: false };
+  }
   renderPrepRules();
 }
 
@@ -1792,13 +1942,22 @@ function renderConfItems() {
   var scoreEl = document.getElementById('conf-score');
   var verdictEl = document.getElementById('conf-verdict');
   if (!el) return;
-  var score = Object.values(CONF_STATE).filter(Boolean).length;
+  var canToggle = CURRENT_USER && CURRENT_USER !== 'guest';
+  var score = 0;
+  CONF_ITEMS.forEach(function(_, i) {
+    var entry = CONF_STATE[i] || {};
+    if (entry === true || entry.checked === true) score++;
+  });
   el.innerHTML = CONF_ITEMS.map(function(item, i) {
-    var on = !!CONF_STATE[i];
+    var entry = CONF_STATE[i] || {};
+    var on = entry === true || entry.checked === true;
+    var by = entry.by || '';
+    var at = entry.at ? fmtDT(entry.at) : '';
+    var meta = on && (by || at) ? '<div style="font-size:9px;color:var(--green);margin-top:1px">' + (by ? by + ' · ' : '') + at + '</div>' : '';
     return '<div class="conf-item-row ' + (on ? 'conf-yes' : '') + '">' +
-      '<span style="font-size:12px;color:var(--text2)">' + item + '</span>' +
-      '<button class="conf-toggle ' + (on ? 'on' : 'off') + '" onclick="toggleConf(' + i + ')"></button>' +
-      '</div>';
+      '<div style="flex:1"><span style="font-size:12px;color:var(--text2)">' + item + '</span>' + meta + '</div>' +
+      '<button class="conf-toggle ' + (on ? 'on' : 'off') + '" ' + (canToggle ? 'onclick="toggleConf(' + i + ')"' : 'disabled') + '></button>' +
+    '</div>';
   }).join('');
   if (scoreEl) scoreEl.textContent = score;
   if (verdictEl) {
@@ -1809,7 +1968,17 @@ function renderConfItems() {
 }
 
 function toggleConf(i) {
-  CONF_STATE[i] = !CONF_STATE[i];
+  var entry = CONF_STATE[i] || {};
+  var on = entry === true || entry.checked === true;
+  if (!on) {
+    CONF_STATE[i] = {
+      checked: true,
+      by: CURRENT_USER === 'enz' ? 'Enz' : CURRENT_USER === 'abd' ? 'Abdullah' : 'Guest',
+      at: new Date().toISOString()
+    };
+  } else {
+    CONF_STATE[i] = { checked: false };
+  }
   renderConfItems();
 }
 
@@ -1889,8 +2058,222 @@ function initPrepPage() {
 }
 
 /* ══════════════════════════════════════════
-   TOAST
+   WATCHLIST
 ══════════════════════════════════════════ */
+var WL_LEVELS = [];
+var WL_HISTORY = [];
+
+var WL_TYPE_ORDER = ['VAH','Resistance','POC','LVN','HVN','PDH','PDL','Support','Custom','Watch'];
+
+function wlToday() { return new Date().toISOString().split('T')[0]; }
+
+async function loadWatchlist() {
+  // Load today's active levels
+  var today = wlToday();
+  var data = await sbFetch('/rest/v1/watchlist_levels?date=eq.' + today + '&order=created_at.asc');
+  WL_LEVELS = Array.isArray(data) ? data : [];
+  // Load history (past 7 days, not today)
+  var hist = await sbFetch('/rest/v1/watchlist_levels?date=neq.' + today + '&order=date.desc&limit=30');
+  WL_HISTORY = Array.isArray(hist) ? hist : [];
+}
+
+async function saveLevel(level) {
+  var res = await sbFetch('/rest/v1/watchlist_levels');
+  try {
+    var r = await fetch(SB_URL + '/rest/v1/watchlist_levels', {
+      method: 'POST',
+      headers: Object.assign({}, sbHeaders(), { 'Prefer': 'return=representation' }),
+      body: JSON.stringify(level)
+    });
+    if (!r.ok) return null;
+    var saved = await r.json();
+    return Array.isArray(saved) ? saved[0] : saved;
+  } catch(e) { return null; }
+}
+
+async function patchLevel(id, patch) {
+  try {
+    await fetch(SB_URL + '/rest/v1/watchlist_levels?id=eq.' + id, {
+      method: 'PATCH',
+      headers: sbHeaders(),
+      body: JSON.stringify(patch)
+    });
+  } catch(e) {}
+}
+
+async function deleteLevel(id) {
+  await sbDelete('/rest/v1/watchlist_levels?id=eq.' + id);
+}
+
+async function addLevel() {
+  var priceEl = document.getElementById('wl-price');
+  var typeEl = document.getElementById('wl-type');
+  var biasEl = document.getElementById('wl-bias');
+  var noteEl = document.getElementById('wl-note');
+  var price = priceEl ? priceEl.value.trim() : '';
+  if (!price) { toast('Enter a price level', 'r'); if(priceEl) priceEl.focus(); return; }
+  var level = {
+    date: wlToday(),
+    price: price,
+    type: typeEl ? typeEl.value : 'Custom',
+    bias: biasEl ? biasEl.value : '',
+    note: noteEl ? noteEl.value.trim() : '',
+    hit: false,
+    added_by: CURRENT_USER === 'enz' ? 'Enz' : CURRENT_USER === 'abd' ? 'Abdullah' : 'Guest',
+    created_at: new Date().toISOString()
+  };
+  var syncEl = document.getElementById('watch-sync-label');
+  if (syncEl) syncEl.textContent = 'Saving...';
+  var saved = await saveLevel(level);
+  if (saved) {
+    WL_LEVELS.push(saved);
+  } else {
+    // Fallback: add locally with temp id
+    level.id = 'tmp-' + Date.now();
+    WL_LEVELS.push(level);
+  }
+  if (priceEl) priceEl.value = '';
+  if (noteEl) noteEl.value = '';
+  if (syncEl) { syncEl.textContent = 'Saved'; setTimeout(function(){ syncEl.textContent=''; }, 1500); }
+  renderWatchlist();
+  toast('Level added', 'g');
+  showNotification(level.added_by + ' added ' + level.price + ' (' + level.type + ')', level.note || '');
+}
+
+async function markHit(id) {
+  var level = WL_LEVELS.find(function(l){ return l.id === id; });
+  if (!level) return;
+  level.hit = !level.hit;
+  level.hit_at = level.hit ? new Date().toISOString() : null;
+  renderWatchlist();
+  await patchLevel(id, { hit: level.hit, hit_at: level.hit_at });
+}
+
+async function removeLevel(id) {
+  WL_LEVELS = WL_LEVELS.filter(function(l){ return l.id !== id; });
+  renderWatchlist();
+  await deleteLevel(id);
+}
+
+async function clearDoneLevels() {
+  var hitIds = WL_LEVELS.filter(function(l){ return l.hit; }).map(function(l){ return l.id; });
+  if (!hitIds.length) { toast('No hit levels to clear', 'r'); return; }
+  WL_LEVELS = WL_LEVELS.filter(function(l){ return !l.hit; });
+  renderWatchlist();
+  for (var i = 0; i < hitIds.length; i++) { await deleteLevel(hitIds[i]); }
+  toast('Hit levels cleared');
+}
+
+async function clearAllLevels() {
+  if (!WL_LEVELS.length) { toast('Nothing to clear', 'r'); return; }
+  if (!confirm('Clear all levels for today?')) return;
+  var ids = WL_LEVELS.map(function(l){ return l.id; });
+  WL_LEVELS = [];
+  renderWatchlist();
+  for (var i = 0; i < ids.length; i++) { await deleteLevel(ids[i]); }
+  toast('All cleared');
+}
+
+function wlBiasStyle(bias) {
+  if (bias === 'Long') return 'background:var(--gbg);color:var(--green);border:1px solid var(--gbr)';
+  if (bias === 'Short') return 'background:var(--rbg);color:var(--red);border:1px solid var(--rbr)';
+  if (bias === 'Watch') return 'background:var(--abg);color:var(--amber);border:1px solid var(--abr)';
+  return '';
+}
+
+function renderWatchlist() {
+  var el = document.getElementById('watch-list');
+  if (!el) return;
+  var canAct = CURRENT_USER && CURRENT_USER !== 'guest';
+
+  if (!WL_LEVELS.length) {
+    el.innerHTML = '<div class="wl-empty">No levels yet today — add your first one above.<br><span style="font-size:11px;color:var(--text3);margin-top:4px;display:block">Visible to everyone. Synced in real time.</span></div>';
+    renderWatchHistory();
+    return;
+  }
+
+  // Split active vs hit
+  var active = WL_LEVELS.filter(function(l){ return !l.hit; });
+  var hit = WL_LEVELS.filter(function(l){ return l.hit; });
+
+  // Sort active by price descending (resistance on top, support at bottom)
+  active.sort(function(a,b){ return parseFloat(b.price) - parseFloat(a.price); });
+
+  function levelRow(l) {
+    var hitTime = l.hit && l.hit_at ? ' · hit ' + fmtDT(l.hit_at) : '';
+    var addedTime = l.created_at ? fmtDT(l.created_at) : '';
+    var biasHtml = l.bias ? '<span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;' + wlBiasStyle(l.bias) + '">' + l.bias.toUpperCase() + '</span>' : '';
+    var addedBy = l.added_by ? '<span style="font-size:10px;color:var(--text3)">' + l.added_by + '</span>' : '';
+    return '<div class="wl-item' + (l.hit ? ' hit' : '') + '">' +
+      '<div style="display:flex;flex-direction:column;gap:3px;min-width:80px">' +
+        '<span class="wl-price">' + l.price + '</span>' +
+        '<div style="display:flex;gap:4px;align-items:center">' +
+          '<span class="wl-type-badge wlt-' + l.type + '">' + l.type + '</span>' +
+          biasHtml +
+        '</div>' +
+      '</div>' +
+      '<div style="flex:1;min-width:0">' +
+        (l.note ? '<div class="wl-note-text">' + esc(l.note) + '</div>' : '') +
+        '<div style="font-size:10px;color:var(--text3);margin-top:3px">' + addedBy + (addedBy&&addedTime?' · ':'') + addedTime + hitTime + '</div>' +
+      '</div>' +
+      (canAct ? '<div class="wl-actions">' +
+        '<button class="wl-hit-btn" onclick="markHit(\'' + l.id + '\')">' + (l.hit ? 'Undo' : 'Hit') + '</button>' +
+        '<button class="wl-del-btn" onclick="removeLevel(\'' + l.id + '\')">×</button>' +
+      '</div>' : '') +
+    '</div>';
+  }
+
+  var html = '';
+  if (active.length) {
+    html += '<div class="wl-section-label">Active — ' + active.length + ' level' + (active.length>1?'s':'') + '</div>';
+    html += active.map(levelRow).join('');
+  }
+  if (hit.length) {
+    html += '<div class="wl-section-label">Hit — ' + hit.length + '</div>';
+    html += hit.map(levelRow).join('');
+  }
+
+  el.innerHTML = html;
+  renderWatchHistory();
+}
+
+function renderWatchHistory() {
+  var el = document.getElementById('watch-history');
+  if (!el) return;
+  if (!WL_HISTORY.length) { el.innerHTML = ''; return; }
+
+  // Group by date
+  var byDate = {};
+  WL_HISTORY.forEach(function(l) {
+    if (!byDate[l.date]) byDate[l.date] = [];
+    byDate[l.date].push(l);
+  });
+
+  el.innerHTML = Object.keys(byDate).map(function(date) {
+    var levels = byDate[date];
+    var hitCount = levels.filter(function(l){ return l.hit; }).length;
+    var tags = levels.map(function(l) {
+      var col = l.hit ? 'var(--text3)' : (l.bias==='Long'?'var(--green)':l.bias==='Short'?'var(--red)':'var(--text2)');
+      var bg = l.hit ? 'var(--bg3)' : (l.bias==='Long'?'var(--gbg)':l.bias==='Short'?'var(--rbg)':'var(--bg3)');
+      var br = l.hit ? 'var(--border)' : (l.bias==='Long'?'var(--gbr)':l.bias==='Short'?'var(--rbr)':'var(--border2)');
+      return '<span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;background:' + bg + ';color:' + col + ';border:1px solid ' + br + (l.hit?';text-decoration:line-through':'') + '">' + l.price + ' ' + l.type + '</span>';
+    }).join('');
+    return '<div class="wh-card">' +
+      '<div class="wh-card-header">' +
+        '<span class="wh-date">' + date + '</span>' +
+        '<span class="wh-by">' + hitCount + '/' + levels.length + ' hit</span>' +
+      '</div>' +
+      '<div class="wh-levels">' + tags + '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function initWatchPage() {
+  var today = new Date().toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  var el = document.getElementById('watch-date-label');
+  if (el) el.textContent = today;
+  renderWatchlist();
+}
 var toastTimer = null;
 function toast(msg, type) {
   var el = document.getElementById('toast');
@@ -1898,6 +2281,30 @@ function toast(msg, type) {
   el.textContent = msg;
   el.className = 'on' + (type === 'g' ? ' tg' : type === 'r' ? ' tr' : '');
   toastTimer = setTimeout(function() { el.className = ''; }, 3000);
+}
+
+/* ══════════════════════════════════════════
+   NOTIFICATIONS
+══════════════════════════════════════════ */
+var notifContainer = null;
+function initNotifications() {
+  notifContainer = document.createElement('div');
+  notifContainer.style.cssText = 'position:fixed;top:70px;right:16px;z-index:9998;display:flex;flex-direction:column;gap:8px;pointer-events:none;width:280px';
+  document.body.appendChild(notifContainer);
+}
+function showNotification(title, sub) {
+  if (!notifContainer) initNotifications();
+  var el = document.createElement('div');
+  el.style.cssText = 'background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;box-shadow:0 4px 16px rgba(0,0,0,.12);pointer-events:auto;opacity:0;transform:translateX(20px);transition:all .25s';
+  el.innerHTML = '<div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:2px">' + title + '</div>' +
+    (sub ? '<div style="font-size:11px;color:var(--text3);margin-bottom:3px">' + sub + '</div>' : '') +
+    '<div style="font-size:10px;color:var(--text3)">' + fmtDT(new Date().toISOString()) + '</div>';
+  notifContainer.appendChild(el);
+  requestAnimationFrame(function() { el.style.opacity='1'; el.style.transform='translateX(0)'; });
+  setTimeout(function() {
+    el.style.opacity='0'; el.style.transform='translateX(20px)';
+    setTimeout(function() { if(el.parentNode) el.parentNode.removeChild(el); }, 300);
+  }, 4500);
 }
 
 /* ══════════════════════════════════════════
@@ -1909,7 +2316,8 @@ async function init() {
     loadFromSupabase('enz'),
     loadFromSupabase('abd'),
     loadNotes(),
-    loadPrep()
+    loadPrep(),
+    loadWatchlist()
   ]);
 }
 init();

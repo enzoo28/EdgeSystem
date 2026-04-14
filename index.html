@@ -2549,7 +2549,7 @@ var GEX_AUTO_TIMER = null;
 var GEX_CONNECTED = false;
 var FLASHALPHA_URL = 'https://lab.flashalpha.com/v1/exposure/gex/';
 
-// CORS proxies tried in order
+// CORS proxies tried in order — /api/gex is the Vercel edge function (works on deployed site)
 var GEX_PROXIES = [
   function(url, key) { return { url: 'https://corsproxy.io/?' + encodeURIComponent(url), headers: { 'X-Api-Key': key } }; },
   function(url, key) { return { url: 'https://proxy.cors.sh/' + url, headers: { 'X-Api-Key': key, 'x-cors-api-key': 'temp_' + key.slice(0,8) } }; },
@@ -2635,23 +2635,57 @@ async function tryFetchGEX(apiKey, symbol) {
   var targetUrl = FLASHALPHA_URL + encodeURIComponent(symbol);
   var lastErr = null;
 
-  // Try direct first (works if server has CORS headers or on Vercel)
+  // ── ATTEMPT 1: Vercel edge function proxy (works on deployed site, no CORS) ──
   try {
-    var res = await fetch(targetUrl, { headers: { 'X-Api-Key': apiKey } });
-    if (res.ok) { var d = await res.json(); if (d && !d.error) return d; }
+    var r1 = await fetch('/api/gex?symbol=' + encodeURIComponent(symbol) + '&key=' + encodeURIComponent(apiKey), {
+      headers: { 'Accept': 'application/json' }
+    });
+    if (r1.ok) {
+      var d1 = await r1.json();
+      if (d1 && !d1.error && (d1.underlying_price || d1.gamma_flip || d1.net_gex)) return d1;
+    }
   } catch(e) { lastErr = e; }
 
-  // Try proxies in order
+  // ── ATTEMPT 2: Direct call (works if FlashAlpha adds CORS headers in future) ──
+  try {
+    var r2 = await fetch(targetUrl, { headers: { 'X-Api-Key': apiKey, 'Accept': 'application/json' } });
+    if (r2.ok) {
+      var d2 = await r2.json();
+      if (d2 && !d2.error && (d2.underlying_price || d2.gamma_flip)) return d2;
+    }
+    if (r2.status === 401 || r2.status === 403) {
+      var errBody = {};
+      try { errBody = await r2.json(); } catch(e2) {}
+      var det = errBody.detail || errBody.message || errBody.error || '';
+      if (r2.status === 401) throw new Error('401 Invalid API key: ' + det);
+      throw new Error('403 Forbidden: ' + det);
+    }
+    if (r2.status === 429) throw new Error('429 Rate limit exceeded');
+    if (r2.status === 404) throw new Error('404 Symbol not found');
+  } catch(e) {
+    if (e.message && (e.message.indexOf('401') !== -1 || e.message.indexOf('403') !== -1 || e.message.indexOf('429') !== -1 || e.message.indexOf('404') !== -1)) throw e;
+    lastErr = e;
+  }
+
+  // ── ATTEMPT 3–5: CORS proxies ──
   for (var i = 0; i < GEX_PROXIES.length; i++) {
     try {
       var cfg = GEX_PROXIES[i](targetUrl, apiKey);
-      var r = await fetch(cfg.url, { headers: cfg.headers });
-      var text = await r.text();
-      // Check it's actually JSON
-      if (text.trim().charAt(0) !== '{' && text.trim().charAt(0) !== '[') continue;
+      var rp = await fetch(cfg.url, { headers: Object.assign({ 'Accept': 'application/json' }, cfg.headers) });
+      var text = await rp.text();
+      var ch = text.trim().charAt(0);
+      if (ch !== '{' && ch !== '[') continue;
       var data = JSON.parse(text);
       if (data && !data.error && (data.underlying_price || data.gamma_flip)) return data;
-    } catch(e) { lastErr = e; }
+      if (data && (data.error || data.message)) {
+        var em = data.error || data.message || '';
+        if (em.toLowerCase().indexOf('invalid') !== -1 || em.toLowerCase().indexOf('unauthorized') !== -1) throw new Error('401 ' + em);
+        if (em.toLowerCase().indexOf('rate') !== -1 || em.toLowerCase().indexOf('limit') !== -1) throw new Error('429 ' + em);
+      }
+    } catch(e) {
+      if (e.message && (e.message.indexOf('401') !== -1 || e.message.indexOf('403') !== -1)) throw e;
+      lastErr = e;
+    }
   }
 
   throw lastErr || new Error('All connection attempts failed');
@@ -2699,14 +2733,18 @@ async function loadGEX() {
   } catch(e) {
     var msg = e.message || '';
     var userMsg;
-    if (msg.indexOf('401') !== -1 || msg.indexOf('403') !== -1) {
+    if (msg.indexOf('401') !== -1) {
       userMsg = 'Invalid API key. Double-check it at flashalpha.com — no spaces or extra characters.';
+    } else if (msg.indexOf('403') !== -1) {
+      userMsg = 'API key rejected (403). Your free plan may have expired or this endpoint requires a paid plan.';
     } else if (msg.indexOf('429') !== -1) {
-      userMsg = 'Rate limit hit. Free plan = 5 requests/day. Wait until tomorrow or upgrade.';
-    } else if (msg.indexOf('fetch') !== -1 || msg.indexOf('Failed') !== -1 || msg.indexOf('CORS') !== -1) {
-      userMsg = 'Browser blocked the request (CORS). Deploy your site to Vercel and it will work live. Showing demo data for now.';
+      userMsg = 'Rate limit hit. Free plan = 5 requests/day. Wait until tomorrow or upgrade at flashalpha.com.';
+    } else if (msg.indexOf('404') !== -1) {
+      userMsg = 'Symbol "' + GEX_SYMBOL + '" not found. Try SPY or QQQ instead.';
+    } else if (msg.indexOf('fetch') !== -1 || msg.indexOf('Failed') !== -1 || msg.indexOf('CORS') !== -1 || msg.indexOf('network') !== -1) {
+      userMsg = 'Browser blocked the request (CORS). This is fixed when your site is deployed to Vercel — see the Setup Guide tab for instructions. Showing demo data for now.';
     } else {
-      userMsg = 'Connection error: ' + msg.slice(0, 100) + '. Showing demo data.';
+      userMsg = 'Connection error: ' + msg.slice(0, 120) + '. Showing demo data.';
     }
 
     if (errEl) { errEl.style.display = 'block'; errEl.textContent = userMsg; }
